@@ -236,10 +236,10 @@ Public Class Form1
             SelectArray(0) = 1
 
             'Now, grab a list of all the shows that match the GenreID
-            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genrelinktvshow WHERE idGenre='" & SplitItem(0) & "'", SelectArray)
+            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'tvshow' AND genre_id ='" & SplitItem(0) & "'", SelectArray)
 
             'This will grab the number of movies.
-            Dim ReturnArray2() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genrelinkmovie WHERE idGenre='" & SplitItem(0) & "'", SelectArray)
+            Dim ReturnArray2() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'movie' AND genre_id ='" & SplitItem(0) & "'", SelectArray)
 
 
             Dim ShowNum
@@ -714,7 +714,7 @@ Public Class Form1
 
 
             'Now, gather a list of all the show IDs that match the genreID
-            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genrelinktvshow WHERE idGenre='" & GenresList.Items(GenresList.SelectedIndices(0)).SubItems(4).Text & "'", SelectArray)
+            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'tvshow' AND genre_id ='" & GenresList.Items(GenresList.SelectedIndices(0)).SubItems(4).Text & "'", SelectArray)
 
             'Now loop through each one individually.
 
@@ -733,7 +733,7 @@ Public Class Form1
 
             'MOVIES REPEAT THIS PROCESS.
 
-            Dim ReturnArrayMovies() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genrelinkmovie WHERE idGenre='" & GenresList.Items(GenresList.SelectedIndices(0)).SubItems(4).Text & "'", SelectArray)
+            Dim ReturnArrayMovies() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'movie' AND genre_id ='" & GenresList.Items(GenresList.SelectedIndices(0)).SubItems(4).Text & "'", SelectArray)
 
             'Now loop through each one individually 
             If ReturnArrayMovies Is Nothing Then
@@ -865,7 +865,7 @@ Public Class Form1
 
 
                 'Now, gather a list of all the show IDs that match the genreID
-                Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genrelinktvshow WHERE idGenre='" & LookUpGenre(TVChannelTypeValue) & "'", SelectArray)
+                Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'tvshow' AND genre_id ='" & LookUpGenre(TVChannelTypeValue) & "'", SelectArray)
 
                 'Now loop through each one individually.
                 For x = 0 To ReturnArray.Count - 1
@@ -885,7 +885,7 @@ Public Class Form1
             Dim SelectArrayMovies(0)
             SelectArrayMovies(0) = 1
 
-            Dim ReturnArrayMovies() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genrelinkmovie WHERE idGenre='" & LookUpGenre(TVChannelTypeValue) & "'", SelectArrayMovies)
+            Dim ReturnArrayMovies() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'movie' AND genre_id ='" & LookUpGenre(TVChannelTypeValue) & "'", SelectArrayMovies)
 
 
             'Now loop through each one individually.
@@ -913,7 +913,7 @@ Public Class Form1
 
                 'Now, gather a list of all the show IDs that match the genreID
 
-                Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genrelinktvshow WHERE idGenre='" & LookUpGenre(TVChannelTypeValue) & "'", SelectArray)
+                Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'tvshow' AND genre_id ='" & LookUpGenre(TVChannelTypeValue) & "'", SelectArray)
 
 
                 'Now loop through each one individually.
@@ -935,7 +935,7 @@ Public Class Form1
                 Dim SelectArrayMovies(0)
                 SelectArrayMovies(0) = 1
 
-                Dim ReturnArrayMovies() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genrelinkmovie WHERE idGenre='" & LookUpGenre(TVChannelTypeValue) & "'", SelectArrayMovies)
+                Dim ReturnArrayMovies() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'movie' AND genre_id ='" & LookUpGenre(TVChannelTypeValue) & "'", SelectArrayMovies)
 
 
                 'Now loop through each one individually.
