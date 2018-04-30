@@ -32,7 +32,7 @@ Public Class Form1
         SelectArray(0) = 0
 
         'Shoot it over to the ReadRecord sub
-        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre where strGenre='" & GenreName & "'", SelectArray)
+        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre where name ='" & GenreName & "'", SelectArray)
 
         'The ID # is all we need.
         'Just make sure it's not a null reference.
@@ -773,12 +773,12 @@ Public Class Form1
             Status.Text = "Updated " & TxtShowName.Text & " Successfully"
 
             'Remove all genres from tv show
-            DbExecute("DELETE FROM genrelinktvshow  WHERE idShow = '" & TVShowLabel.Text & "'")
+            DbExecute("DELETE FROM genre_link WHERE media_id = '" & TVShowLabel.Text & "'")
 
             'add each one.  one by one.
             For x = 0 To ListTVGenres.Items.Count - 1
                 Dim GenreID = LookUpGenre(ListTVGenres.Items(x).ToString)
-                DbExecute("INSERT INTO genrelinktvshow (idGenre, idShow) VALUES ('" & GenreID & "', '" & TVShowLabel.Text & "')")
+                DbExecute("INSERT INTO genre_link (genre_id, media_id, media_type) VALUES ('" & GenreID & "', '" & TVShowLabel.Text & "', 'tvshow')")
             Next
 
             'Now update the tv show table
@@ -1887,12 +1887,12 @@ Public Class Form1
             Status.Text = "Updated " & MovieLabel.Text & " Successfully"
 
             'Remove all genres from tv show
-            DbExecute("DELETE FROM genrelinkmovie  WHERE idMovie = '" & MovieID & "'")
+            DbExecute("DELETE FROM genre_link WHERE genre_id = '" & MovieID & "'")
 
             'add each one.  one by one.
             For x = 0 To MovieGenresList.Items.Count - 1
                 Dim GenreID = LookUpGenre(MovieGenresList.Items(x).ToString)
-                DbExecute("INSERT INTO genrelinkmovie (idGenre, idMovie) VALUES ('" & GenreID & "', '" & MovieID & "')")
+                DbExecute("INSERT INTO genre_link (genre_id, media_id, media_type) VALUES ('" & GenreID & "', '" & MovieID & "', 'movie')")
             Next
 
             'Save our spot on the list.

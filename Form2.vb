@@ -24,7 +24,7 @@
 
 
             'Insert the Link from the genre to the TV Show.
-            'Form1.DbExecute("INSERT INTO genrelinktvshow (idGenre, idShow) VALUES ('" & GenreID & "','" & ShowID & "')")
+            'Form1.DbExecute("INSERT INTO genre_link (genre_id, media_id, media_type) VALUES ('" & GenreID & "','" & ShowID & "', 'tvshow')")
 
 
             'Maybe remove
@@ -105,12 +105,11 @@
             SelectArray(0) = 0
 
             'Grab the GenreID and store it in GenreID
-            Dim ReturnArray() As String = DbReadRecord(Form1.VideoDatabaseLocation, "SELECT * FROM genre WHERE strGenre = '" & GenreList.SelectedItems(0).Text & "'", SelectArray)
+            Dim ReturnArray() As String = DbReadRecord(Form1.VideoDatabaseLocation, "SELECT * FROM genre WHERE name = '" & GenreList.SelectedItems(0).Text & "'", SelectArray)
             Dim GenreID = ReturnArray(0)
 
-            'Remove it from the Genrelink table
-            DbExecute("DELETE FROM genrelinktvshow WHERE idGenre = '" & GenreID & "'")
-            'DbExecute("DELETE FROM genremovie WHERE idGenre = '" & GenreID & "'")
+            'Remove it from the Genre_link table
+            DbExecute("DELETE FROM genre_link WHERE genre_id = '" & GenreID & "' AND media_type = 'tvshow'")
 
             'Remove it from the Genres table
             DbExecute("DELETE FROM genre WHERE idGenre = '" & GenreID & "'")
