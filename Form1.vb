@@ -765,8 +765,8 @@ Public Class Form1
             Dim NetworkID = LookUpNetwork(txtShowNetwork.Text)
 
 
-            DbExecute("DELETE FROM studiolinktvshow WHERE idShow = '" & TVShowLabel.Text & "'")
-            DbExecute("INSERT INTO studiolinktvshow (idStudio, idShow) VALUES ('" & NetworkID & "', '" & TVShowLabel.Text & "')")
+            DbExecute("DELETE FROM studio_link WHERE media_type='tvshow' AND studio_id = '" & TVShowLabel.Text & "'")
+            DbExecute("INSERT INTO studio_link (studio_id, media_id, media_type) VALUES ('" & NetworkID & "', '" & TVShowLabel.Text & "', 'tvshow')")
 
 
             DbExecute("UPDATE tvshow SET c00 = '" & TvShowName & "', c08 = '" & ShowGenres & "', c14 ='" & txtShowNetwork.Text & "' WHERE idShow = '" & TVShowLabel.Text & "'")
