@@ -19,7 +19,7 @@
                 End If
             Next
             If AlreadyUsed = False Then
-                DbExecute("INSERT INTO studio (strStudio) VALUES ('" & NetworkName & "')")
+                DbExecute("INSERT INTO studio (name) VALUES ('" & NetworkName & "')")
                 Form1.RefreshAllStudios()
             Else
                 MsgBox("You already have a Studio labeled : " & NetworkName)
@@ -52,7 +52,7 @@
         End If
 
         'Now grab the Studio's ID
-        Dim ReturnArray2() As String = DbReadRecord(Form1.VideoDatabaseLocation, "SELECT * FROM studio WHERE strStudio = '" & ListBox1.Text.ToString() & "'", SelectArray)
+        Dim ReturnArray2() As String = DbReadRecord(Form1.VideoDatabaseLocation, "SELECT * FROM studio WHERE name = '" & ListBox1.Text.ToString() & "'", SelectArray)
         If ReturnArray Is Nothing Then
         Else
             Dim StudioID = ReturnArray2(0)
@@ -62,7 +62,7 @@
             'Now remove the studio completely
 
         End If
-        DbExecute("DELETE FROM studio WHERE strStudio = '" & ListBox1.Text.ToString() & "'")
+        DbExecute("DELETE FROM studio WHERE name = '" & ListBox1.Text.ToString() & "'")
         Form1.RefreshAllStudios()
     End Sub
 End Class

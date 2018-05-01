@@ -54,7 +54,7 @@ Public Class Form1
         SelectArray(0) = 0
 
         'Shoot it over to the ReadRecord sub
-        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM studio where strStudio='" & Network & "'", SelectArray)
+        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM studio where name='" & Network & "'", SelectArray)
 
         'The ID # is all we need.
         'Just make sure it's not a null reference.
