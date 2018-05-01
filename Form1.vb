@@ -1879,8 +1879,8 @@ Public Class Form1
             Dim MovieID As String = MovieList.SelectedItems(0).SubItems(1).Text
 
 
-            DbExecute("DELETE FROM studiolinkmovie WHERE idMovie = '" & MovieID & "'")
-            DbExecute("INSERT INTO studiolinkmovie (idStudio, idMovie) VALUES ('" & NetworkID & "', '" & MovieID & "')")
+            DbExecute("DELETE FROM studio_link WHERE media_type = 'movie' AND movie_id = '" & MovieID & "'")
+            DbExecute("INSERT INTO studio_link (studio_id, media_id, media_type) VALUES ('" & NetworkID & "', '" & MovieID & "', 'movie')")
 
 
             DbExecute("UPDATE movie SET c14 = '" & MovieGenres & "', c18 ='" & txtMovieNetwork.Text & "' WHERE idMovie = '" & MovieID & "'")

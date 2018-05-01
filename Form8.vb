@@ -57,7 +57,7 @@
         Else
             Dim StudioID = ReturnArray2(0)
             'Remove all links in the studiotvlink table
-            DbExecute("DELETE FROM studiolinkmovie WHERE idStudio = '" & StudioID & "'")
+            DbExecute("DELETE FROM studio_link WHERE media_type = 'movie' AND studio_id = '" & StudioID & "'")
 
             'Now remove the studio completely
 
