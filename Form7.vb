@@ -97,7 +97,7 @@
             DbExecute("DELETE FROM genre_link WHERE genre_id = '" & GenreID & "' AND media_type = 'movie'")
 
             'Remove it from the Genres table
-            DbExecute("DELETE FROM genre WHERE idGenre = '" & GenreID & "'")
+            DbExecute("DELETE FROM genre WHERE genre_id = '" & GenreID & "'")
 
             'Now grab the TV table & remove the genre there. 
 
@@ -139,7 +139,7 @@
                         End If
                     Next
 
-
+                    'TODO - Movie or TVShow table? idShow is for TVShow table.
                     'Now update the actual Database.
                     DbExecute("UPDATE movie SET c08 = '" & ProperFormedGenres & "' WHERE idShow = '" & TVShowID & "'")
 

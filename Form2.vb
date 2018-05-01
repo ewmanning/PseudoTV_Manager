@@ -86,7 +86,7 @@
 
 
             If AlreadyUsed = False Then
-                DbExecute("INSERT INTO genre (strGenre) VALUES ('" & NewGenre & "')")
+                DbExecute("INSERT INTO genre (name) VALUES ('" & NewGenre & "')")
             Else
                 MsgBox("You already have a genre labeled : " & NewGenre)
             End If
@@ -112,7 +112,7 @@
             DbExecute("DELETE FROM genre_link WHERE genre_id = '" & GenreID & "' AND media_type = 'tvshow'")
 
             'Remove it from the Genres table
-            DbExecute("DELETE FROM genre WHERE idGenre = '" & GenreID & "'")
+            DbExecute("DELETE FROM genre WHERE genre_id = '" & GenreID & "'")
 
             'Now grab the TV table & remove the genre there. 
 
