@@ -1749,7 +1749,7 @@ Public Class Form1
             Dim GenreID = LookUpGenre(MovieGenresList.Items(MovieGenresList.SelectedIndex).ToString)
 
             'Now, remove the link in the database.
-            'DbExecute("DELETE FROM genrelinktvshow WHERE idGenre = '" & GenreID & "' AND idShow ='" & TVShowList.Items(TVShowList.SelectedIndices(0)).SubItems(2).Text & "'")
+            'DbExecute("DELETE FROM genre_link WHERE media_type = 'tvshow' AND genre_id = '" & GenreID & "' AND media_id ='" & TVShowList.Items(TVShowList.SelectedIndices(0)).SubItems(2).Text & "'")
 
 
             MovieGenresList.Items.RemoveAt(MovieGenresList.SelectedIndex)
