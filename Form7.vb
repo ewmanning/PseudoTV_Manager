@@ -70,7 +70,7 @@
 
 
             If AlreadyUsed = False Then
-                DbExecute("INSERT INTO genre (strGenre) VALUES ('" & NewGenre & "')")
+                DbExecute("INSERT INTO genre (name) VALUES ('" & NewGenre & "')")
             Else
                 MsgBox("You already have a genre labeled : " & NewGenre)
             End If
