@@ -67,7 +67,7 @@
             'Now remove the studio completely
 
         End If
-        DbExecute("DELETE FROM studio WHERE strStudio = '" & ListBox1.Text.ToString() & "'")
+        DbExecute("DELETE FROM studio WHERE name = '" & ListBox1.Text.ToString() & "'")
         Form1.RefreshAllStudios()
         Form1.RefreshALL()
     End Sub
