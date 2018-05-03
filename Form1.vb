@@ -1738,8 +1738,8 @@ Public Class Form1
     End Sub
 
     Private Sub Button16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button16.Click
-        Form7.Visible = True
-        Form7.Focus()
+        FrmMovieGenres.Visible = True
+        FrmMovieGenres.Focus()
     End Sub
 
     Private Sub Button15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button15.Click

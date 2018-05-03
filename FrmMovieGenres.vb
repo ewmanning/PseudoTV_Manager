@@ -1,7 +1,7 @@
-﻿Public Class Form7
+﻿Public Class FrmMovieGenres
     Public Event MovieGenresAdded(genres As ListView.SelectedListViewItemCollection)
 
-    Private Sub Form7_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+    Private Sub FrmMovieGenres_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         lstGenres.Items.Clear()
         lstGenres.Columns.Add("Genre", 200, HorizontalAlignment.Left)
         lstGenres.Columns.Add("ID", 0, HorizontalAlignment.Left)
@@ -81,7 +81,7 @@
             End If
         End If
 
-        Form7_Load(Nothing, Nothing)
+        FrmMovieGenres_Load(Nothing, Nothing)
     End Sub
 
     Private Sub BtnDelete_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnDelete.Click
@@ -89,7 +89,7 @@
             DeleteMovieGenre()
             RemoveGenreFromMovie()
             
-            Form7_Load(Nothing, Nothing)
+            FrmMovieGenres_Load(Nothing, Nothing)
         End If
     End Sub
 
