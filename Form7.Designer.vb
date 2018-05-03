@@ -22,65 +22,70 @@ Partial Class Form7
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.GenreList = New System.Windows.Forms.ListView()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.SuspendLayout()
+        Me.BtnDelete = New System.Windows.Forms.Button()
+        Me.BtnNew = New System.Windows.Forms.Button()
+        Me.lstGenres = New System.Windows.Forms.ListView()
+        Me.BtnAdd = New System.Windows.Forms.Button()
+        Me.SuspendLayout
         '
-        'Button3
+        'BtnDelete
         '
-        Me.Button3.Location = New System.Drawing.Point(153, 247)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(51, 20)
-        Me.Button3.TabIndex = 8
-        Me.Button3.Text = "Del"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.BtnDelete.Location = New System.Drawing.Point(204, 304)
+        Me.BtnDelete.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnDelete.Name = "BtnDelete"
+        Me.BtnDelete.Size = New System.Drawing.Size(68, 25)
+        Me.BtnDelete.TabIndex = 8
+        Me.BtnDelete.Text = "Del"
+        Me.BtnDelete.UseVisualStyleBackColor = true
         '
-        'Button2
+        'BtnNew
         '
-        Me.Button2.Location = New System.Drawing.Point(12, 247)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(51, 20)
-        Me.Button2.TabIndex = 7
-        Me.Button2.Text = "New"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.BtnNew.Location = New System.Drawing.Point(16, 304)
+        Me.BtnNew.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnNew.Name = "BtnNew"
+        Me.BtnNew.Size = New System.Drawing.Size(68, 25)
+        Me.BtnNew.TabIndex = 7
+        Me.BtnNew.Text = "New"
+        Me.BtnNew.UseVisualStyleBackColor = true
         '
         'GenreList
         '
-        Me.GenreList.Location = New System.Drawing.Point(4, 12)
-        Me.GenreList.Name = "GenreList"
-        Me.GenreList.Size = New System.Drawing.Size(208, 229)
-        Me.GenreList.TabIndex = 6
-        Me.GenreList.UseCompatibleStateImageBehavior = False
-        Me.GenreList.View = System.Windows.Forms.View.Details
+        Me.lstGenres.Location = New System.Drawing.Point(5, 15)
+        Me.lstGenres.Margin = New System.Windows.Forms.Padding(4)
+        Me.lstGenres.Name = "lstGenres"
+        Me.lstGenres.Size = New System.Drawing.Size(276, 281)
+        Me.lstGenres.TabIndex = 6
+        Me.lstGenres.UseCompatibleStateImageBehavior = false
+        Me.lstGenres.View = System.Windows.Forms.View.Details
         '
-        'Button1
+        'BtnAdd
         '
-        Me.Button1.Location = New System.Drawing.Point(36, 273)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(142, 28)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "Add"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.BtnAdd.Location = New System.Drawing.Point(48, 336)
+        Me.BtnAdd.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnAdd.Name = "BtnAdd"
+        Me.BtnAdd.Size = New System.Drawing.Size(189, 34)
+        Me.BtnAdd.TabIndex = 5
+        Me.BtnAdd.Text = "Add"
+        Me.BtnAdd.UseVisualStyleBackColor = true
         '
         'Form7
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8!, 16!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(216, 307)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.GenreList)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(288, 378)
+        Me.Controls.Add(Me.BtnDelete)
+        Me.Controls.Add(Me.BtnNew)
+        Me.Controls.Add(Me.lstGenres)
+        Me.Controls.Add(Me.BtnAdd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Form7"
         Me.Text = "Add Movie Genres"
-        Me.ResumeLayout(False)
+        Me.ResumeLayout(false)
 
-    End Sub
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents GenreList As System.Windows.Forms.ListView
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+End Sub
+    Friend WithEvents BtnDelete As System.Windows.Forms.Button
+    Friend WithEvents BtnNew As System.Windows.Forms.Button
+    Friend WithEvents lstGenres As System.Windows.Forms.ListView
+    Friend WithEvents BtnAdd As System.Windows.Forms.Button
 End Class
