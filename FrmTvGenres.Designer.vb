@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form2
+Partial Class FrmTvGenres
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,20 +22,20 @@ Partial Class Form2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BtnAdd = New System.Windows.Forms.Button()
         Me.GenreList = New System.Windows.Forms.ListView()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.BtnNew = New System.Windows.Forms.Button()
+        Me.BtnDelete = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(35, 276)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(142, 28)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Add"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.BtnAdd.Location = New System.Drawing.Point(35, 276)
+        Me.BtnAdd.Name = "BtnAdd"
+        Me.BtnAdd.Size = New System.Drawing.Size(142, 28)
+        Me.BtnAdd.TabIndex = 1
+        Me.BtnAdd.Text = "Add"
+        Me.BtnAdd.UseVisualStyleBackColor = True
         '
         'GenreList
         '
@@ -48,31 +48,31 @@ Partial Class Form2
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(12, 247)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(51, 20)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "New"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.BtnNew.Location = New System.Drawing.Point(12, 247)
+        Me.BtnNew.Name = "BtnNew"
+        Me.BtnNew.Size = New System.Drawing.Size(51, 20)
+        Me.BtnNew.TabIndex = 3
+        Me.BtnNew.Text = "New"
+        Me.BtnNew.UseVisualStyleBackColor = True
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(153, 247)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(51, 20)
-        Me.Button3.TabIndex = 4
-        Me.Button3.Text = "Del"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.BtnDelete.Location = New System.Drawing.Point(153, 247)
+        Me.BtnDelete.Name = "BtnDelete"
+        Me.BtnDelete.Size = New System.Drawing.Size(51, 20)
+        Me.BtnDelete.TabIndex = 4
+        Me.BtnDelete.Text = "Del"
+        Me.BtnDelete.UseVisualStyleBackColor = True
         '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(216, 307)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.BtnDelete)
+        Me.Controls.Add(Me.BtnNew)
         Me.Controls.Add(Me.GenreList)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.BtnAdd)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "Form2"
         Me.Text = "Add TV Genre(s)"
@@ -80,8 +80,8 @@ Partial Class Form2
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents BtnAdd As System.Windows.Forms.Button
     Friend WithEvents GenreList As System.Windows.Forms.ListView
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents BtnNew As System.Windows.Forms.Button
+    Friend WithEvents BtnDelete As System.Windows.Forms.Button
 End Class

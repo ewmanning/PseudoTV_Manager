@@ -629,8 +629,8 @@ Public Class Form1
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         If TVShowList.SelectedIndices.Count > 0 Then
-            Form2.Visible = True
-            Form2.Focus()
+            FrmTvGenres.Visible = True
+            FrmTvGenres.Focus()
         End If
     End Sub
 
