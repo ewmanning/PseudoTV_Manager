@@ -103,8 +103,7 @@
         Dim returnArray() As String = DbReadRecord(Form1.VideoDatabaseLocation, sqlStatement, selectArray)
         Dim genreId = returnArray(0)
 
-        'Remove it from the Genre_link table
-        DbExecute($"DELETE FROM genre_link WHERE genre_id = '{genreId}' AND media_type = 'tvshow'")
+        'Remove it from the Genre_link table for movies only
         DbExecute($"DELETE FROM genre_link WHERE genre_id = '{genreId}' AND media_type = 'movie'")
 
         'Remove it from the Genres table
@@ -118,7 +117,6 @@
         selectArray(1) = 9
 
         Dim statement = $"SELECT * FROM movie WHERE c14 LIKE '%{lstGenres.SelectedItems(0).Text}%'"
-        
         Dim returnArray() As String = DbReadRecord(Form1.VideoDatabaseLocation, statement, selectArray)
 
         'Make sure there's not a null return for the genre items.
