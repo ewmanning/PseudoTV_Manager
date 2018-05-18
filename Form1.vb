@@ -314,43 +314,12 @@ Public Class Form1
         Next
     End Sub
 
-    Public Sub RefreshMovieList()
-
-        MovieList.Items.Clear()
-
-        'Set an array with the columns you want returned
-        Dim SelectArray(1)
-        SelectArray(0) = 2
-        SelectArray(1) = 0
-
-        'Shoot it over to the ReadRecord sub, 
-        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM movie ORDER BY c00", SelectArray)
-
-        'Now, read the output of the array.
-        'Loop through each of the Array items.
-        For x = 0 To ReturnArray.Count - 1
-
-            'Split them by ~'s.  This is how we seperate the rows in the single-element.
-            Dim str() As String = Split(ReturnArray(x), "~")
-
-            'Now take that split string and make it an item.
-            Dim itm As ListViewItem
-            itm = New ListViewItem(str)
-
-            'Add the item to the TV show list.
-            MovieList.Items.Add(itm)
-        Next
-    End Sub
-
-
-
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        
+
         TVShowList.Columns.Add("Show", 100, HorizontalAlignment.Left)
         TVShowList.Columns.Add("Network", 100, HorizontalAlignment.Left)
         TVShowList.Columns.Add("ID", 0, HorizontalAlignment.Left)
-
-        MovieList.Columns.Add("Movie", 300, HorizontalAlignment.Left)
-        MovieList.Columns.Add("ID", 0, HorizontalAlignment.Left)
 
         NetworkList.Columns.Add("Network", 140, HorizontalAlignment.Left)
         NetworkList.Columns.Add("# Shows", 60, HorizontalAlignment.Left)
@@ -363,8 +332,6 @@ Public Class Form1
         GenresList.Columns.Add("# Movies", 60, HorizontalAlignment.Center)
         GenresList.Columns.Add("# Total", 80, HorizontalAlignment.Center)
         GenresList.Columns.Add("Genre ID", 0, HorizontalAlignment.Left)
-
-
 
         TVGuideList.Columns.Add("Channel", 200, HorizontalAlignment.Left)
         TVGuideList.Columns.Add("Type", 0, HorizontalAlignment.Left)
@@ -421,6 +388,19 @@ Public Class Form1
             System.IO.File.Create(SettingsFile)
             MsgBox("Unable to locate the location of XBMC video library and PseudoTV's setting location.  Please enter them and save the changes.")
         End If
+
+        Dim frmMovies As New FrmTabMovies
+        frmMovies.TopLevel = False
+        frmMovies.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+        frmMovies.Dock = DockStyle.Fill
+
+        Dim tpMovies2 As New TabPage
+        tpMovies2.Name = "Movies2"
+        tpMovies2.Text = $"Movies 2"
+        tpMovies2.Controls.Add(frmMovies)
+        tpMovies2.AutoSize = True
+        TabControl1.TabPages.Add(tpMovies2)
+        frmMovies.Show()
 
     End Sub
 
@@ -538,7 +518,9 @@ Public Class Form1
         Option2.Items.Clear()
         Form3.ListBox1.Items.Clear()
         txtShowNetwork.Items.Clear()
-        txtMovieNetwork.Items.Clear()
+
+        'TODO - Use Event
+        'txtMovieNetwork.Items.Clear()
         Form8.ListBox1.Items.Clear()
 
         'Set an array with the columns you want returned
@@ -555,7 +537,8 @@ Public Class Form1
             Option2.Items.Add(ReturnArray(x))
             Form3.ListBox1.Items.Add(ReturnArray(x))
             txtShowNetwork.Items.Add(ReturnArray(x))
-            txtMovieNetwork.Items.Add(ReturnArray(x))
+            'TODO - Use Event
+            'txtMovieNetwork.Items.Add(ReturnArray(x))
             Form8.ListBox1.Items.Add(ReturnArray(x))
         Next
 
@@ -564,7 +547,8 @@ Public Class Form1
         Form3.ListBox1.Sorted = True
         Form8.ListBox1.Sorted = True
         txtShowNetwork.Sorted = True
-        txtMovieNetwork.Sorted = True
+        'TODO - Use Event
+        'txtMovieNetwork.Sorted = True
         Option2.Text = SavedText
 
     End Sub
@@ -656,7 +640,8 @@ Public Class Form1
 
     Public Sub RefreshALL()
         If VideoDatabaseLocation <> "" Or MySQLConnectionString <> "" And PseudoTvSettingsLocation <> "" Then
-            RefreshMovieList()
+            'TODO - Use Event
+            'RefreshMovieList()
             RefreshTVShows()
             RefreshAllStudios()
             RefreshNetworkList()
@@ -1668,95 +1653,11 @@ Public Class Form1
 
     End Sub
 
-    Private Sub MovieList_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MovieList.SelectedIndexChanged
-        If MovieList.SelectedItems.Count > 0 Then
-
-            Dim ListItem As ListViewItem
-            ListItem = MovieList.SelectedItems.Item(0)
-
-            Dim MovieName
-            Dim MovieID
-
-            MovieID = ListItem.SubItems(1).Text
-            MovieName = ListItem.SubItems(0).Text
-
-            Dim SelectArray(2)
-            SelectArray(0) = 16
-            SelectArray(1) = 24
-            SelectArray(2) = 20
+    
 
 
 
-            'Shoot it over to the ReadRecord sub, 
-            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM movie WHERE idMovie='" & MovieID & "'", SelectArray)
-
-            Dim ReturnArraySplit() As String
-
-            'We only have 1 response, since it searches by ID. So, just break it into parts. 
-            ReturnArraySplit = Split(ReturnArray(0), "~")
-
-
-
-            Dim MovieGenres As String = ReturnArraySplit(0)
-
-            MovieLabel.Text = MovieName
-            MovieLocation.Text = ReturnArraySplit(1)
-
-            If ReturnArraySplit(2) = "" Then
-                txtMovieNetwork.SelectedIndex = -1
-            Else
-                txtMovieNetwork.Text = ReturnArraySplit(2)
-            End If
-
-
-            'Loop through each Movie Genre, if there more than one.
-            MovieGenresList.Items.Clear()
-            If InStr(MovieGenres, " / ") > 0 Then
-                Dim MovieGenresSplit() As String = Split(MovieGenres, " / ")
-
-                For x = 0 To UBound(MovieGenresSplit)
-                    MovieGenresList.Items.Add(MovieGenresSplit(x))
-                Next
-            ElseIf MovieGenres <> "" Then
-                MovieGenresList.Items.Add(MovieGenres)
-            End If
-
-            If MovieLocation.TextLength >= 6 Then
-                If MovieLocation.Text.Substring(0, 6) = "smb://" Then
-                    MovieLocation.Text = "//" & MovieLocation.Text.Substring(6)
-                End If
-            End If
-
-            If System.IO.File.Exists(MovieLocation.Text & "folder.jpg") Then
-                MoviePicture.ImageLocation = MovieLocation.Text & "folder.jpg"
-            Else
-                MoviePicture.ImageLocation = Nothing
-            End If
-
-
-        End If
-    End Sub
-
-    Private Sub Button16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button16.Click
-        FrmMovieGenres.Visible = True
-        FrmMovieGenres.Focus()
-    End Sub
-
-    Private Sub Button15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button15.Click
-        If MovieGenresList.SelectedIndex >= 0 Then
-
-            'Grab the 3rd column from the TVShowList, which is the TVShowID
-            Dim GenreID = LookUpGenre(MovieGenresList.Items(MovieGenresList.SelectedIndex).ToString)
-
-            'Now, remove the link in the database.
-            'DbExecute("DELETE FROM genre_link WHERE media_type = 'tvshow' AND genre_id = '" & GenreID & "' AND media_id ='" & TVShowList.Items(TVShowList.SelectedIndices(0)).SubItems(2).Text & "'")
-
-
-            MovieGenresList.Items.RemoveAt(MovieGenresList.SelectedIndex)
-            ' SaveTVShow_Click(Nothing, Nothing)
-            RefreshGenres()
-        End If
-    End Sub
+    
 
     Public Sub RefreshNetworkListMovies()
         MovieNetworkList.Items.Clear()
@@ -1866,60 +1767,9 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button17.Click
-        If MovieList.SelectedItems.Count > 0 Then
+    
 
-            ' Fix any issues with shows and 's.
-            Dim MovieName As String = MovieLabel.Text
-            'Convert show genres into the format ex:  genre1 / genre2 / etc.
-            Dim MovieGenres = ConvertGenres(MovieGenresList)
-            MovieName = Replace(MovieName, "'", "''")
-            'Grab the Network ID based on the name
-            Dim NetworkID = LookUpNetwork(txtMovieNetwork.Text)
-            Dim MovieID As String = MovieList.SelectedItems(0).SubItems(1).Text
-
-
-            DbExecute("DELETE FROM studio_link WHERE media_type = 'movie' AND movie_id = '" & MovieID & "'")
-            DbExecute("INSERT INTO studio_link (studio_id, media_id, media_type) VALUES ('" & NetworkID & "', '" & MovieID & "', 'movie')")
-
-
-            DbExecute("UPDATE movie SET c14 = '" & MovieGenres & "', c18 ='" & txtMovieNetwork.Text & "' WHERE idMovie = '" & MovieID & "'")
-            Status.Text = "Updated " & MovieLabel.Text & " Successfully"
-
-            'Remove all genres from tv show
-            DbExecute("DELETE FROM genre_link WHERE genre_id = '" & MovieID & "'")
-
-            'add each one.  one by one.
-            For x = 0 To MovieGenresList.Items.Count - 1
-                Dim GenreID = LookUpGenre(MovieGenresList.Items(x).ToString)
-                DbExecute("INSERT INTO genre_link (genre_id, media_id, media_type) VALUES ('" & GenreID & "', '" & MovieID & "', 'movie')")
-            Next
-
-            'Save our spot on the list.
-            Dim SavedName = txtMovieNetwork.Text
-
-            'Refresh Things
-            RefreshNetworkListMovies()
-            RefreshGenres()
-
-
-
-            Dim returnindex = MovieList.SelectedIndices(0)
-            RefreshMovieList()
-            MovieList.Items(returnindex).Selected = True
-
-
-
-        End If
-    End Sub
-
-    Private Sub Button18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button18.Click
-        If MovieList.SelectedItems.Count > 0 Then
-            RefreshAllStudios()
-            Form8.Visible = True
-            Form8.Focus()
-        End If
-    End Sub
+    
 
     Private Sub MovieNetworkList_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles MovieNetworkList.ColumnClick
         ' Get the new sorting column. 
