@@ -131,11 +131,11 @@
             Dim movieName As String = MovieLabel.Text
 
             'Convert show genres into the format ex:  genre1 / genre2 / etc.
-            Dim movieGenres = Form1.ConvertGenres(MovieGenresList)
+            Dim movieGenres = ConvertGenres(MovieGenresList)
             movieName = Replace(movieName, "'", "''")
 
             'Grab the Network ID based on the name
-            Dim networkId = Form1.LookUpNetwork(txtMovieNetwork.Text)
+            Dim networkId = LookUpNetwork(txtMovieNetwork.Text)
             Dim movieId As String = MovieList.SelectedItems(0).SubItems(1).Text
 
 

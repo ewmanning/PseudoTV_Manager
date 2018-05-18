@@ -22,50 +22,6 @@ Public Class Form1
     'Public VideoDatabaseLocation As String = ""
     Public PseudoTvSettingsLocation As String = ""
 
-
-    Public Function LookUpGenre(ByVal GenreName As String)
-        'This looks up the Genre based on the name and returns the proper Genre ID
-
-        Dim GenreID As String = Nothing
-
-        Dim SelectArray(0)
-        SelectArray(0) = 0
-
-        'Shoot it over to the ReadRecord sub
-        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre where name ='" & GenreName & "'", SelectArray)
-
-        'The ID # is all we need.
-        'Just make sure it's not a null reference.
-        If ReturnArray Is Nothing Then
-            MsgBox("nothing!")
-        Else
-            GenreID = ReturnArray(0)
-        End If
-
-        Return GenreID
-    End Function
-
-    Public Function LookUpNetwork(ByVal Network As String)
-        'This looks up the Network name and returns the proper Network ID
-
-        Dim NetworkID As String = Nothing
-
-        Dim SelectArray(0)
-        SelectArray(0) = 0
-
-        'Shoot it over to the ReadRecord sub
-        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM studio where name='" & Network & "'", SelectArray)
-
-        'The ID # is all we need.
-        'Just make sure it's not a null reference.
-        If ReturnArray Is Nothing Then
-        Else
-            NetworkID = ReturnArray(0)
-        End If
-        Return NetworkID
-
-    End Function
-
     Public Sub RefreshTVGuide()
         'Clear the TV name and the List items
         TVGuideShowName.Text = ""
@@ -277,49 +233,12 @@ Public Class Form1
             itm = New ListViewItem(str)
             'Add to list
             GenresList.Items.Add(itm)
-
-
-
         Next
 
         GenresList.Sort()
     End Sub
 
-
-    Public Sub RefreshTVShows()
-        TVShowList.Items.Clear()
-
-        'Set an array with the columns you want returned
-        Dim SelectArray(2)
-        SelectArray(0) = 1
-        SelectArray(1) = 15
-        SelectArray(2) = 0
-
-        'Shoot it over to the ReadRecord sub, 
-        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM tvshow ORDER BY c00", SelectArray)
-
-        'Now, read the output of the array.
-        'Loop through each of the Array items.
-        For x = 0 To ReturnArray.Count - 1
-
-            'Split them by ~'s.  This is how we seperate the rows in the single-element.
-            Dim str() As String = Split(ReturnArray(x), "~")
-
-            'Now take that split string and make it an item.
-            Dim itm As ListViewItem
-            itm = New ListViewItem(str)
-
-            'Add the item to the TV show list.
-            TVShowList.Items.Add(itm)
-        Next
-    End Sub
-
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        
-
-        TVShowList.Columns.Add("Show", 100, HorizontalAlignment.Left)
-        TVShowList.Columns.Add("Network", 100, HorizontalAlignment.Left)
-        TVShowList.Columns.Add("ID", 0, HorizontalAlignment.Left)
 
         NetworkList.Columns.Add("Network", 140, HorizontalAlignment.Left)
         NetworkList.Columns.Add("# Shows", 60, HorizontalAlignment.Left)
@@ -389,107 +308,41 @@ Public Class Form1
             MsgBox("Unable to locate the location of XBMC video library and PseudoTV's setting location.  Please enter them and save the changes.")
         End If
 
+        'TV Show Tab
+        Dim frmTvShows As New FrmTabTvShows
+        frmTvShows.TopLevel = False
+        frmTvShows.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+        frmTvShows.Dock = DockStyle.Fill
+
+        Dim tpTvShows As New TabPage
+        tpTvShows.Name = "TvShows"
+        tpTvShows.Text = $"TV Shows"
+        tpTvShows.Controls.Add(frmTvShows)
+        tpTvShows.AutoSize = True
+        TabControl1.TabPages.Add(tpTvShows)
+        frmTvShows.Show()
+
+        'Movies Tab
         Dim frmMovies As New FrmTabMovies
         frmMovies.TopLevel = False
         frmMovies.FormBorderStyle = Windows.Forms.FormBorderStyle.None
         frmMovies.Dock = DockStyle.Fill
 
-        Dim tpMovies2 As New TabPage
-        tpMovies2.Name = "Movies2"
-        tpMovies2.Text = $"Movies 2"
-        tpMovies2.Controls.Add(frmMovies)
-        tpMovies2.AutoSize = True
-        TabControl1.TabPages.Add(tpMovies2)
+        Dim tpMovies As New TabPage
+        tpMovies.Name = "Movies"
+        tpMovies.Text = $"Movies"
+        tpMovies.Controls.Add(frmMovies)
+        tpMovies.AutoSize = True
+        TabControl1.TabPages.Add(tpMovies)
         frmMovies.Show()
 
     End Sub
 
-    Private Sub TVShowList_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TVShowList.SelectedIndexChanged
-        If TVShowList.SelectedItems.Count > 0 Then
-
-            Dim ListItem As ListViewItem
-            ListItem = TVShowList.SelectedItems.Item(0)
-
-            Dim TVShowName
-            Dim TVShowID
-
-            TVShowID = ListItem.SubItems(2).Text
-            TVShowName = ListItem.SubItems(0).Text
-
-            TVShowLabel.Text = TVShowID
-
-            Dim SelectArray(3)
-            SelectArray(0) = 1
-            SelectArray(1) = 9
-            SelectArray(2) = 15
-            SelectArray(3) = 17
-
-            'Shoot it over to the ReadRecord sub, 
-            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM tvshow WHERE idShow='" & TVShowID & "'", SelectArray)
-
-            Dim ReturnArraySplit() As String
-
-            'We only have 1 response, since it searches by ID. So, just break it into parts. 
-            ReturnArraySplit = Split(ReturnArray(0), "~")
+    
 
 
 
-            TxtShowName.Text = ReturnArraySplit(0)
-
-            Dim TVGenres As String = ReturnArraySplit(1)
-            If ReturnArraySplit(2) = "" Then
-                txtShowNetwork.SelectedIndex = -1
-            Else
-                txtShowNetwork.Text = ReturnArraySplit(2)
-            End If
-
-            txtShowLocation.Text = ReturnArraySplit(3)
-
-            'Loop through each TV Genre, if there more than one.
-            ListTVGenres.Items.Clear()
-            If InStr(TVGenres, " / ") > 0 Then
-                Dim TVGenresSplit() As String = Split(TVGenres, " / ")
-
-                For x = 0 To UBound(TVGenresSplit)
-                    ListTVGenres.Items.Add(TVGenresSplit(x))
-                Next
-            ElseIf TVGenres <> "" Then
-                ListTVGenres.Items.Add(TVGenres)
-            End If
-
-
-            If txtShowLocation.TextLength >= 6 Then
-                If txtShowLocation.Text.Substring(0, 6) = "smb://" Then
-                    txtShowLocation.Text = "//" & txtShowLocation.Text.Substring(6)
-                End If
-            End If
-
-            If System.IO.File.Exists(txtShowLocation.Text & "poster.jpg") Then
-                TVShowPictureBox.ImageLocation = txtShowLocation.Text & "poster.jpg"
-            ElseIf System.IO.File.Exists(txtShowLocation.Text & "folder.jpg") Then
-                TVShowPictureBox.ImageLocation = txtShowLocation.Text & "folder.jpg"
-            Else
-                TVShowPictureBox.ImageLocation = Nothing
-            End If
-        End If
-    End Sub
-
-
-
-    Public Function ConvertGenres(ByVal Genrelist As ListBox)
-        'Converts the existing ListTVGenre's contents to the proper format.
-
-        Dim TVGenresString As String = ""
-        For x = 0 To Genrelist.Items.Count - 1
-            If x = 0 Then
-                TVGenresString = Genrelist.Items(x).ToString
-            Else
-                TVGenresString = TVGenresString & " / " & Genrelist.Items(x).ToString
-            End If
-        Next
-
-        Return TVGenresString
-    End Function
+    
 
     Public Sub RefreshAllGenres()
         Dim SavedText = Option2.Text
@@ -517,7 +370,9 @@ Public Class Form1
         'Clear all
         Option2.Items.Clear()
         Form3.ListBox1.Items.Clear()
-        txtShowNetwork.Items.Clear()
+
+        'TODO - Use Event
+        'txtShowNetwork.Items.Clear()
 
         'TODO - Use Event
         'txtMovieNetwork.Items.Clear()
@@ -536,7 +391,10 @@ Public Class Form1
         For x = 0 To ReturnArray.Count - 1
             Option2.Items.Add(ReturnArray(x))
             Form3.ListBox1.Items.Add(ReturnArray(x))
-            txtShowNetwork.Items.Add(ReturnArray(x))
+            
+            'TODO - Use Event
+            'txtShowNetwork.Items.Add(ReturnArray(x))
+
             'TODO - Use Event
             'txtMovieNetwork.Items.Add(ReturnArray(x))
             Form8.ListBox1.Items.Add(ReturnArray(x))
@@ -546,14 +404,14 @@ Public Class Form1
         Option2.Sorted = True
         Form3.ListBox1.Sorted = True
         Form8.ListBox1.Sorted = True
-        txtShowNetwork.Sorted = True
+        
+        'TODO - Use Event
+        'txtShowNetwork.Sorted = True
+        
         'TODO - Use Event
         'txtMovieNetwork.Sorted = True
+
         Option2.Text = SavedText
-
-    End Sub
-
-    Private Sub TabControl1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabControl1.SelectedIndexChanged
 
     End Sub
 
@@ -611,30 +469,11 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        If TVShowList.SelectedIndices.Count > 0 Then
-            FrmTvGenres.Visible = True
-            FrmTvGenres.Focus()
-        End If
-    End Sub
-
-    Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
-        If ListTVGenres.SelectedIndex >= 0 Then
-
-            'Grab the 3rd column from the TVShowList, which is the TVShowID
-            Dim GenreID = LookUpGenre(ListTVGenres.Items(ListTVGenres.SelectedIndex).ToString)
-
-            'Now, remove the link in the database.
-            'DbExecute("DELETE FROM genrelinktvshow WHERE idGenre = '" & GenreID & "' AND idShow ='" & TVShowList.Items(TVShowList.SelectedIndices(0)).SubItems(2).Text & "'")
+    
 
 
-            ListTVGenres.Items.RemoveAt(ListTVGenres.SelectedIndex)
-            ' SaveTVShow_Click(Nothing, Nothing)
-            RefreshGenres()
-        End If
-    End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         RefreshALL()
     End Sub
 
@@ -642,14 +481,19 @@ Public Class Form1
         If VideoDatabaseLocation <> "" Or MySQLConnectionString <> "" And PseudoTvSettingsLocation <> "" Then
             'TODO - Use Event
             'RefreshMovieList()
-            RefreshTVShows()
+
+            'TODO - Use Event
+            'RefreshTVShows()
+
             RefreshAllStudios()
             RefreshNetworkList()
             RefreshNetworkListMovies()
             RefreshGenres()
-            TxtShowName.Text = ""
-            txtShowLocation.Text = ""
-            TVShowPictureBox.ImageLocation = ""
+
+            'TODO - Reset as part of event raised above
+'            TxtShowName.Text = ""
+'            txtShowLocation.Text = ""
+'            TVShowPictureBox.ImageLocation = ""
         End If
     End Sub
 
@@ -737,54 +581,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub SaveTVShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveTVShow.Click
-
-        If TVShowList.SelectedItems.Count > 0 Then
-
-            ' Fix any issues with shows and 's.
-            Dim TvShowName As String = TxtShowName.Text
-            'Convert show genres into the format ex:  genre1 / genre2 / etc.
-            Dim ShowGenres = ConvertGenres(ListTVGenres)
-            TvShowName = Replace(TvShowName, "'", "''")
-            'Grab the Network ID based on the name
-            Dim NetworkID = LookUpNetwork(txtShowNetwork.Text)
-
-
-            DbExecute("DELETE FROM studio_link WHERE media_type='tvshow' AND studio_id = '" & TVShowLabel.Text & "'")
-            DbExecute("INSERT INTO studio_link (studio_id, media_id, media_type) VALUES ('" & NetworkID & "', '" & TVShowLabel.Text & "', 'tvshow')")
-
-
-            DbExecute("UPDATE tvshow SET c00 = '" & TvShowName & "', c08 = '" & ShowGenres & "', c14 ='" & txtShowNetwork.Text & "' WHERE idShow = '" & TVShowLabel.Text & "'")
-            Status.Text = "Updated " & TxtShowName.Text & " Successfully"
-
-            'Remove all genres from tv show
-            DbExecute("DELETE FROM genre_link WHERE media_id = '" & TVShowLabel.Text & "'")
-
-            'add each one.  one by one.
-            For x = 0 To ListTVGenres.Items.Count - 1
-                Dim GenreID = LookUpGenre(ListTVGenres.Items(x).ToString)
-                DbExecute("INSERT INTO genre_link (genre_id, media_id, media_type) VALUES ('" & GenreID & "', '" & TVShowLabel.Text & "', 'tvshow')")
-            Next
-
-            'Now update the tv show table
-
-            Dim SavedName = txtShowNetwork.Text
-
-            'Refresh Things
-            RefreshNetworkList()
-            RefreshGenres()
-
-            'Reset the text
-            'txtShowNetwork.Text = SavedName
-
-            Dim returnindex = TVShowList.SelectedIndices(0)
-            RefreshALL()
-            TVShowList.Items(returnindex).Selected = True
-
-
-        End If
-
-    End Sub
+    
 
 
 
@@ -1073,11 +870,12 @@ Public Class Form1
                     'Mixed Genre
                     RefreshAllGenres()
 
-                ElseIf PlayListNumber = 6 Then
-                    'TV Show
-                    For x = 0 To TVShowList.Items.Count - 1
-                        Option2.Items.Add(TVShowList.Items(x).SubItems(0).Text)
-                    Next
+                    'TODO Need access to TVShowList?
+'                ElseIf PlayListNumber = 6 Then
+'                    'TV Show
+'                    For x = 0 To TVShowList.Items.Count - 1
+'                        Option2.Items.Add(TVShowList.Items(x).SubItems(0).Text)
+'                    Next
                 ElseIf PlayListNumber = 7 Then
                     'Directory
                     NoOption = True
@@ -1252,10 +1050,11 @@ Public Class Form1
             RefreshAllGenres()
         ElseIf PlayListType.SelectedIndex = 5 Then
             RefreshAllGenres()
-        ElseIf PlayListType.SelectedIndex = 6 Then
-            For x = 0 To TVShowList.Items.Count - 1
-                Option2.Items.Add(TVShowList.Items(x).SubItems(0).Text)
-            Next
+            'TODO Need access to TVShowList?
+'        ElseIf PlayListType.SelectedIndex = 6 Then
+'            For x = 0 To TVShowList.Items.Count - 1
+'                Option2.Items.Add(TVShowList.Items(x).SubItems(0).Text)
+'            Next
         End If
 
     End Sub
@@ -1474,13 +1273,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
-        If TVShowList.SelectedItems.Count > 0 Then
-            RefreshAllStudios()
-            Form3.Visible = True
-            Form3.Focus()
-        End If
-    End Sub
+    
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
         If InterleavedList.SelectedItems.Count > 0 Then
@@ -1824,7 +1617,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button19.Click
+    Private Sub Button19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         LookUpGenre("aaccc")
     End Sub
 End Class

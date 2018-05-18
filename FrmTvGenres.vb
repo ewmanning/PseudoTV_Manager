@@ -35,14 +35,14 @@
         If GenreList.SelectedIndices.Count > 0 Then
             Dim inlist As Boolean = False
 
-            For x = 0 To Form1.ListTVGenres.Items.Count - 1
-                If StrComp(Form1.ListTVGenres.Items(x).ToString, GenreList.Items(GenreList.SelectedIndices(0)).SubItems(0).Text) = 0 Then
+            For x = 0 To FrmTabTvShows.ListTVGenres.Items.Count - 1
+                If StrComp(FrmTabTvShows.ListTVGenres.Items(x).ToString, GenreList.Items(GenreList.SelectedIndices(0)).SubItems(0).Text) = 0 Then
                     inlist = True
                 End If
             Next
 
             If inlist = False Then
-                Form1.ListTVGenres.Items.Add(GenreList.Items(GenreList.SelectedIndices(0)).SubItems(0).Text)
+                FrmTabTvShows.ListTVGenres.Items.Add(GenreList.Items(GenreList.SelectedIndices(0)).SubItems(0).Text)
             Else
                 MsgBox($"There's already a genre for this show named: {GenreList.Items(GenreList.SelectedIndices(0)).SubItems(0).Text}")
             End If
