@@ -43,7 +43,7 @@ Public Class Form6
 
                 'Now, update the variables in the Main form with the proper paths
                 Form1.DatabaseType = 0
-                Form1.VideoDatabaseLocation = TextBox1.Text
+                VideoDatabaseLocation = TextBox1.Text
                 Form1.PseudoTvSettingsLocation = TextBox2.Text
 
                 'Refresh everything
@@ -84,8 +84,8 @@ Public Class Form6
 
     Private Sub Form6_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        If Form1.VideoDatabaseLocation <> "" Then
-            TextBox1.Text = Form1.VideoDatabaseLocation
+        If VideoDatabaseLocation <> "" Then
+            TextBox1.Text = VideoDatabaseLocation
             TextBox2.Text = Form1.PseudoTvSettingsLocation
         End If
 

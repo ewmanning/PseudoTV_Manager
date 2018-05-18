@@ -160,6 +160,7 @@
     <Compile Include="Form8.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ModGlobal.vb" />
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

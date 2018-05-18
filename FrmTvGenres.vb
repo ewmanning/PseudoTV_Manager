@@ -11,7 +11,7 @@
         selectArray(1) = 0
 
         'Shoot it over to the ReadRecord sub, 
-        Dim returnArray() As String = DbReadRecord(Form1.VideoDatabaseLocation, "SELECT * FROM genre", selectArray)
+        Dim returnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre", selectArray)
 
         'Now, read the output of the array.
         'Loop through each of the Array items.
@@ -104,7 +104,7 @@
         selectArray(0) = 0
 
         'Grab the GenreID and store it in GenreID
-        Dim returnArray() As String = DbReadRecord(Form1.VideoDatabaseLocation, $"SELECT * FROM genre WHERE name = '{GenreList.SelectedItems(0).Text}'", selectArray)
+        Dim returnArray() As String = DbReadRecord(VideoDatabaseLocation, $"SELECT * FROM genre WHERE name = '{GenreList.SelectedItems(0).Text}'", selectArray)
         Dim genreId = returnArray(0)
 
         'Remove it from the Genre_link table for tv shows only
@@ -122,7 +122,7 @@
         selectArray(1) = 9
 
         Dim statement = $"SELECT * FROM tvshow WHERE c08 LIKE '%{GenreList.SelectedItems(0).Text}%'"
-        Dim returnArray() As String = DbReadRecord(Form1.VideoDatabaseLocation, statement, selectArray)
+        Dim returnArray() As String = DbReadRecord(VideoDatabaseLocation, statement, selectArray)
 
         'Make sure there's not a null return for the genre items.
         If returnArray Is Nothing Then

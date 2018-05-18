@@ -30,7 +30,7 @@ Module Module1
             'This is a standard, SQLite database.
             Dim SQLconnect As New SQLite.SQLiteConnection()
             Dim SQLcommand As SQLiteCommand = Nothing
-            SQLconnect.ConnectionString = "Data Source=" & Form1.VideoDatabaseLocation
+            SQLconnect.ConnectionString = "Data Source=" & VideoDatabaseLocation
             Try
                 SQLconnect.Open()
                 SQLcommand = SQLconnect.CreateCommand
@@ -120,7 +120,7 @@ Module Module1
             'Open the connection.
             Dim SQLconnect As New SQLite.SQLiteConnection()
             Dim SQLcommand As SQLiteCommand = Nothing
-            SQLconnect.ConnectionString = "Data Source=" & Form1.VideoDatabaseLocation
+            SQLconnect.ConnectionString = "Data Source=" & VideoDatabaseLocation
 
             Try
                 SQLconnect.Open()

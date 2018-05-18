@@ -37,7 +37,7 @@
         Dim SelectArray(0)
         SelectArray(0) = 0
 
-        Dim ReturnArray() As String = DbReadRecord(Form1.VideoDatabaseLocation, "SELECT * FROM movie WHERE c18 = '" & ListBox1.Text.ToString() & "'", SelectArray)
+        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM movie WHERE c18 = '" & ListBox1.Text.ToString() & "'", SelectArray)
         'Make sure there's not a null return for the genre items.
         If ReturnArray Is Nothing Then
         Else
@@ -52,7 +52,7 @@
         End If
 
         'Now grab the Studio's ID
-        Dim ReturnArray2() As String = DbReadRecord(Form1.VideoDatabaseLocation, "SELECT * FROM studio WHERE name = '" & ListBox1.Text.ToString() & "'", SelectArray)
+        Dim ReturnArray2() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM studio WHERE name = '" & ListBox1.Text.ToString() & "'", SelectArray)
         If ReturnArray Is Nothing Then
         Else
             Dim StudioID = ReturnArray2(0)

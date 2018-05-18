@@ -19,7 +19,7 @@ Public Class Form1
 
     Public DatabaseType As Integer = 0
     Public MySQLConnectionString As String = ""
-    Public VideoDatabaseLocation As String = ""
+    'Public VideoDatabaseLocation As String = ""
     Public PseudoTvSettingsLocation As String = ""
 
 
