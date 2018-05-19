@@ -1,5 +1,5 @@
 ﻿Public Class FrmMovieGenres
-    Public Event MovieGenresAdded(genres As ListView.SelectedListViewItemCollection)
+    Public Event MovieGenresAdded(ByVal genres As ListView.SelectedListViewItemCollection)
 
     Private Sub FrmMovieGenres_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         lstGenres.Items.Clear()
@@ -36,30 +36,9 @@
     End Sub
     
     Private Sub BtnAdd_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnAdd.Click
-        'Add genre to movie genre list
-        If lstGenres.SelectedIndices.Count > 0 Then
-            'This should really be done using events/observer pattern.
-            'Raise event which is caught by MovieGenresList form. 
-            'That then determines if it contains the genre to be added and acts accordingly
-            RaiseEvent MovieGenresAdded(lstGenres.SelectedItems)
+        If lstGenres.SelectedIndices.Count <= 0 Then Return
 
-
-            'Use original code until we capture the raised event in the other form
-            Dim isInList As Boolean = False
-
-            For x = 0 To Form1.MovieGenresList.Items.Count - 1
-                If StrComp(Form1.MovieGenresList.Items(x).ToString, lstGenres.Items(lstGenres.SelectedIndices(0)).SubItems(0).Text) = 0 Then
-                    isInList = True
-                    Exit For
-                End If
-            Next
-
-            If isInList Then
-                MsgBox("There's already a genre for this show named: " & lstGenres.Items(lstGenres.SelectedIndices(0)).SubItems(0).Text)
-            Else
-                Form1.MovieGenresList.Items.Add(lstGenres.Items(lstGenres.SelectedIndices(0)).SubItems(0).Text)                
-            End If
-        End If
+        RaiseEvent MovieGenresAdded(lstGenres.SelectedItems)
     End Sub
 
     Private Sub BtnNew_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnNew.Click

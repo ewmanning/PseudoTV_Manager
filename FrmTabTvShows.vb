@@ -1,5 +1,8 @@
 ﻿Public Class FrmTabTvShows
+    Public Event TvShowGenresAdded(ByVal genres As ListView.SelectedListViewItemCollection)
+    Public Event TvShowGenresRemoved(ByVal genres As ListView.SelectedListViewItemCollection)
 
+    Public Event TvShowSaved(ByVal tvShowId As String, ByVal tvShowName As String)
 
     '''''' EVENTS
 
@@ -22,21 +25,19 @@
         'Grab the 3rd column from the TVShowList, which is the TVShowID
         Dim genreId = LookUpGenre(ListTVGenres.Items(ListTVGenres.SelectedIndex).ToString)
 
-        'Now, remove the link in the database.
-        'DbExecute("DELETE FROM genrelinktvshow WHERE idGenre = '" & GenreID & "' AND idShow ='" & TVShowList.Items(TVShowList.SelectedIndices(0)).SubItems(2).Text & "'")
-
-
+        'Remove from the GUI list
         ListTVGenres.Items.RemoveAt(ListTVGenres.SelectedIndex)
-        ' SaveTVShow_Click(Nothing, Nothing)
 
-        'TODO - Use Event
-        'RefreshGenres()
+        'Save the TvShow with the new genres
+        SaveTVShow_Click(Nothing, Nothing)
+
+        RaiseEvent TvShowGenresRemoved(Nothing)
     End Sub
 
     Private Sub BtnNetworkBrowse_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnNetworkBrowse.Click 
         If TVShowList.SelectedItems.Count <= 0 Then Return
 
-        'TODO - Use Event
+        'TODO - Should be done in actual form3 not here
         'RefreshAllStudios()
 
         Form3.Visible = True
@@ -45,27 +46,21 @@
 
     Private Sub SaveTVShow_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SaveTVShow.Click 
         If TVShowList.SelectedItems.Count <= 0 Then Return
-        
 
-        ' Fix any issues with shows and 's.
-        Dim tvShowName As String = TxtShowName.Text
-
-        'Convert show genres into the format ex:  genre1 / genre2 / etc.
-        Dim showGenres = ConvertGenres(ListTVGenres)
-        tvShowName = Replace(tvShowName, "'", "''")
+        DbExecute($"DELETE FROM studio_link WHERE media_type='tvshow' AND studio_id = '{TVShowLabel.Text}'")
 
         'Grab the Network ID based on the name
         Dim networkId = LookUpNetwork(txtShowNetwork.Text)
-
-
-        DbExecute($"DELETE FROM studio_link WHERE media_type='tvshow' AND studio_id = '{TVShowLabel.Text}'")
         DbExecute($"INSERT INTO studio_link (studio_id, media_id, media_type) VALUES ('{networkId}', '{TVShowLabel.Text}', 'tvshow')")
         
+        ' Fix any issues with shows and 's.
+        Dim tvShowName As String = Replace(TxtShowName.Text, "'", "''")
+
+        'Convert show genres into the format ex:  genre1 / genre2 / etc.
+        Dim showGenres = ConvertGenres(ListTVGenres)
+
         DbExecute($"UPDATE tvshow SET c00 = '{tvShowName}', c08 = '{showGenres}', c14 ='{txtShowNetwork.Text}' WHERE idShow = '{TVShowLabel.Text}'")
-
-        'TODO - Use Event
-        'Status.Text = "Updated " & TxtShowName.Text & " Successfully"
-
+        
         'Remove all genres from tv show
         DbExecute($"DELETE FROM genre_link WHERE media_id = '{TVShowLabel.Text}'")
 
@@ -76,9 +71,7 @@
         Next
 
         'Now update the tv show table
-
         Dim savedName = txtShowNetwork.Text
-
 
         'Refresh Things
 
@@ -91,12 +84,15 @@
         txtShowNetwork.Text = SavedName
 
         Dim returnindex = TVShowList.SelectedIndices(0)
+
         'TODO - Use Event
         'RefreshALL()
 
         TVShowList.Items(returnindex).Selected = True
 
+        RaiseEvent TvShowSaved(TVShowLabel.Text, TxtShowName.Text)
     End Sub
+
 
     Private Sub TVShowList_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         If TVShowList.SelectedItems.Count > 0 Then

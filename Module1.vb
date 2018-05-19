@@ -21,6 +21,10 @@ Module Module1
 
     End Sub
 
+    Public Function DbReadRecord(ByVal sqlStatement, ByVal columnArray())
+        Return DbReadRecord(VideoDatabaseLocation, sqlStatement, columnArray)
+    End Function
+
     Public Function DbReadRecord(ByVal DBLocation, ByVal SQLStatement, ByVal ColumnArray())
         'Connect to the data-base
 

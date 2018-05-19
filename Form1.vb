@@ -22,6 +22,24 @@ Public Class Form1
     'Public VideoDatabaseLocation As String = ""
     Public PseudoTvSettingsLocation As String = ""
 
+    '===================================================================================================================
+    
+    Private WithEvents _frmTvShows As New FrmTabTvShows
+    Private WithEvents _frmMovies As New FrmTabMovies
+
+    Private Sub _frmTvShows_TvShowSaved(ByVal tvShowId As String, ByVal tvShowName As String) Handles _frmTvShows.TvShowSaved
+        Status.Text = $"Updated {tvShowName} Successfully"
+    End Sub
+
+    Private Sub _frmMovies_MovieSaved(movieId As String, movieName As String) Handles _frmMovies.MovieSaved
+        Status.Text = $"Updated {movieName} Successfully"
+
+        RefreshNetworkListMovies()
+        RefreshGenres()
+    End Sub
+
+    '===================================================================================================================
+    
     Public Sub RefreshTVGuide()
         'Clear the TV name and the List items
         TVGuideShowName.Text = ""
@@ -239,7 +257,6 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
         NetworkList.Columns.Add("Network", 140, HorizontalAlignment.Left)
         NetworkList.Columns.Add("# Shows", 60, HorizontalAlignment.Left)
 
@@ -309,39 +326,33 @@ Public Class Form1
         End If
 
         'TV Show Tab
-        Dim frmTvShows As New FrmTabTvShows
-        frmTvShows.TopLevel = False
-        frmTvShows.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-        frmTvShows.Dock = DockStyle.Fill
+        'Dim frmTvShows As New FrmTabTvShows
+        _frmTvShows.TopLevel = False
+        _frmTvShows.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+        _frmTvShows.Dock = DockStyle.Fill
 
         Dim tpTvShows As New TabPage
         tpTvShows.Name = "TvShows"
         tpTvShows.Text = $"TV Shows"
-        tpTvShows.Controls.Add(frmTvShows)
+        tpTvShows.Controls.Add(_frmTvShows)
         tpTvShows.AutoSize = True
         TabControl1.TabPages.Add(tpTvShows)
-        frmTvShows.Show()
+        _frmTvShows.Show()
 
         'Movies Tab
-        Dim frmMovies As New FrmTabMovies
-        frmMovies.TopLevel = False
-        frmMovies.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-        frmMovies.Dock = DockStyle.Fill
+        _frmMovies.TopLevel = False
+        _frmMovies.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+        _frmMovies.Dock = DockStyle.Fill
 
         Dim tpMovies As New TabPage
         tpMovies.Name = "Movies"
         tpMovies.Text = $"Movies"
-        tpMovies.Controls.Add(frmMovies)
+        tpMovies.Controls.Add(_frmMovies)
         tpMovies.AutoSize = True
         TabControl1.TabPages.Add(tpMovies)
-        frmMovies.Show()
+        _frmMovies.Show()
 
     End Sub
-
-    
-
-
-
     
 
     Public Sub RefreshAllGenres()
@@ -1620,4 +1631,6 @@ Public Class Form1
     Private Sub Button19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         LookUpGenre("aaccc")
     End Sub
+
+
 End Class

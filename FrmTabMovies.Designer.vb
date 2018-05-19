@@ -23,12 +23,12 @@ Partial Class FrmTabMovies
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.MovieLabel = New System.Windows.Forms.Label()
-        Me.Button18 = New System.Windows.Forms.Button()
+        Me.BtnTempLocationBrowse = New System.Windows.Forms.Button()
         Me.MovieIDLabel = New System.Windows.Forms.Label()
-        Me.Button17 = New System.Windows.Forms.Button()
-        Me.txtMovieNetwork = New System.Windows.Forms.ComboBox()
+        Me.BtnSaveMovie = New System.Windows.Forms.Button()
+        Me.cboMovieNetwork = New System.Windows.Forms.ComboBox()
         Me.MovieLocation = New System.Windows.Forms.TextBox()
-        Me.BtnDeleteGenre = New System.Windows.Forms.Button()
+        Me.BtnRemoveGenre = New System.Windows.Forms.Button()
         Me.BtnAddGenre = New System.Windows.Forms.Button()
         Me.MovieGenresList = New System.Windows.Forms.ListBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -48,15 +48,15 @@ Partial Class FrmTabMovies
         Me.MovieLabel.TabIndex = 49
         Me.MovieLabel.Text = "Temp"
         '
-        'Button18
+        'BtnTempLocationBrowse
         '
-        Me.Button18.Location = New System.Drawing.Point(667, 57)
-        Me.Button18.Margin = New System.Windows.Forms.Padding(4)
-        Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(41, 36)
-        Me.Button18.TabIndex = 48
-        Me.Button18.Text = "..."
-        Me.Button18.UseVisualStyleBackColor = true
+        Me.BtnTempLocationBrowse.Location = New System.Drawing.Point(667, 57)
+        Me.BtnTempLocationBrowse.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnTempLocationBrowse.Name = "BtnTempLocationBrowse"
+        Me.BtnTempLocationBrowse.Size = New System.Drawing.Size(41, 36)
+        Me.BtnTempLocationBrowse.TabIndex = 48
+        Me.BtnTempLocationBrowse.Text = "..."
+        Me.BtnTempLocationBrowse.UseVisualStyleBackColor = true
         '
         'MovieIDLabel
         '
@@ -69,26 +69,26 @@ Partial Class FrmTabMovies
         Me.MovieIDLabel.Text = "Label16"
         Me.MovieIDLabel.Visible = false
         '
-        'Button17
+        'BtnSaveMovie
         '
-        Me.Button17.Location = New System.Drawing.Point(311, 473)
-        Me.Button17.Margin = New System.Windows.Forms.Padding(4)
-        Me.Button17.Name = "Button17"
-        Me.Button17.Size = New System.Drawing.Size(105, 38)
-        Me.Button17.TabIndex = 46
-        Me.Button17.Text = "Save"
-        Me.Button17.UseVisualStyleBackColor = true
+        Me.BtnSaveMovie.Location = New System.Drawing.Point(311, 460)
+        Me.BtnSaveMovie.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnSaveMovie.Name = "BtnSaveMovie"
+        Me.BtnSaveMovie.Size = New System.Drawing.Size(105, 38)
+        Me.BtnSaveMovie.TabIndex = 46
+        Me.BtnSaveMovie.Text = "Save"
+        Me.BtnSaveMovie.UseVisualStyleBackColor = true
         '
-        'txtMovieNetwork
+        'cboMovieNetwork
         '
-        Me.txtMovieNetwork.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.txtMovieNetwork.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtMovieNetwork.FormattingEnabled = true
-        Me.txtMovieNetwork.Location = New System.Drawing.Point(308, 57)
-        Me.txtMovieNetwork.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtMovieNetwork.Name = "txtMovieNetwork"
-        Me.txtMovieNetwork.Size = New System.Drawing.Size(349, 33)
-        Me.txtMovieNetwork.TabIndex = 45
+        Me.cboMovieNetwork.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboMovieNetwork.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.cboMovieNetwork.FormattingEnabled = true
+        Me.cboMovieNetwork.Location = New System.Drawing.Point(308, 57)
+        Me.cboMovieNetwork.Margin = New System.Windows.Forms.Padding(4)
+        Me.cboMovieNetwork.Name = "cboMovieNetwork"
+        Me.cboMovieNetwork.Size = New System.Drawing.Size(349, 33)
+        Me.cboMovieNetwork.TabIndex = 45
         '
         'MovieLocation
         '
@@ -98,22 +98,22 @@ Partial Class FrmTabMovies
         Me.MovieLocation.Size = New System.Drawing.Size(352, 22)
         Me.MovieLocation.TabIndex = 44
         '
-        'BtnDeleteGenre
+        'BtnRemoveGenre
         '
-        Me.BtnDeleteGenre.Location = New System.Drawing.Point(612, 179)
-        Me.BtnDeleteGenre.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnDeleteGenre.Name = "BtnDeleteGenre"
-        Me.BtnDeleteGenre.Size = New System.Drawing.Size(49, 26)
-        Me.BtnDeleteGenre.TabIndex = 43
-        Me.BtnDeleteGenre.Text = "Del"
-        Me.BtnDeleteGenre.UseVisualStyleBackColor = true
+        Me.BtnRemoveGenre.Location = New System.Drawing.Point(588, 179)
+        Me.BtnRemoveGenre.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnRemoveGenre.Name = "BtnRemoveGenre"
+        Me.BtnRemoveGenre.Size = New System.Drawing.Size(75, 26)
+        Me.BtnRemoveGenre.TabIndex = 43
+        Me.BtnRemoveGenre.Text = "Remove"
+        Me.BtnRemoveGenre.UseVisualStyleBackColor = true
         '
         'BtnAddGenre
         '
-        Me.BtnAddGenre.Location = New System.Drawing.Point(555, 179)
+        Me.BtnAddGenre.Location = New System.Drawing.Point(505, 179)
         Me.BtnAddGenre.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnAddGenre.Name = "BtnAddGenre"
-        Me.BtnAddGenre.Size = New System.Drawing.Size(49, 26)
+        Me.BtnAddGenre.Size = New System.Drawing.Size(75, 26)
         Me.BtnAddGenre.TabIndex = 42
         Me.BtnAddGenre.Text = "Add"
         Me.BtnAddGenre.UseVisualStyleBackColor = true
@@ -169,12 +169,12 @@ Partial Class FrmTabMovies
         Me.BackColor = System.Drawing.Color.Gray
         Me.ClientSize = New System.Drawing.Size(1200, 800)
         Me.Controls.Add(Me.MovieLabel)
-        Me.Controls.Add(Me.Button18)
+        Me.Controls.Add(Me.BtnTempLocationBrowse)
         Me.Controls.Add(Me.MovieIDLabel)
-        Me.Controls.Add(Me.Button17)
-        Me.Controls.Add(Me.txtMovieNetwork)
+        Me.Controls.Add(Me.BtnSaveMovie)
+        Me.Controls.Add(Me.cboMovieNetwork)
         Me.Controls.Add(Me.MovieLocation)
-        Me.Controls.Add(Me.BtnDeleteGenre)
+        Me.Controls.Add(Me.BtnRemoveGenre)
         Me.Controls.Add(Me.BtnAddGenre)
         Me.Controls.Add(Me.MovieGenresList)
         Me.Controls.Add(Me.Label13)
@@ -189,12 +189,12 @@ Partial Class FrmTabMovies
 End Sub
 
     Friend WithEvents MovieLabel As Label
-    Friend WithEvents Button18 As Button
+    Friend WithEvents BtnTempLocationBrowse As Button
     Friend WithEvents MovieIDLabel As Label
-    Friend WithEvents Button17 As Button
-    Friend WithEvents txtMovieNetwork As ComboBox
+    Friend WithEvents BtnSaveMovie As Button
+    Friend WithEvents cboMovieNetwork As ComboBox
     Friend WithEvents MovieLocation As TextBox
-    Friend WithEvents BtnDeleteGenre As Button
+    Friend WithEvents BtnRemoveGenre As Button
     Friend WithEvents BtnAddGenre As Button
     Friend WithEvents MovieGenresList As ListBox
     Friend WithEvents Label13 As Label

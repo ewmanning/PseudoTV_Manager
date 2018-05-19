@@ -1,19 +1,19 @@
 ﻿Public Module ModGlobal
+    Public Event RefreshNetworks()
+    Public Event RefreshGenres()
+    
     Public VideoDatabaseLocation As String = ""
     
     'This looks up the Genre based on the name and returns the proper Genre ID
     Public Function LookUpGenre(ByVal genreName As String)
-
-        Dim genreId As String = Nothing
-
         Dim selectArray(0)
         selectArray(0) = 0
 
         'Shoot it over to the ReadRecord sub
-        Dim returnArray() As String = DbReadRecord(VideoDatabaseLocation, $"SELECT * FROM genre where name ='{GenreName}'", selectArray)
+        Dim returnArray() As String = DbReadRecord($"SELECT * FROM genre where name ='{GenreName}'", selectArray)
 
-        'The ID # is all we need.
-        'Just make sure it's not a null reference.
+        'The ID # is all we need. Just make sure it's not a null reference.
+        Dim genreId As String = Nothing
         If returnArray Is Nothing Then
             MsgBox("nothing!")
         Else
@@ -22,7 +22,7 @@
 
         Return genreId
     End Function
-    
+
     Public Function ConvertGenres(ByVal genrelist As ListBox)
         'Converts the existing ListTVGenre's contents to the proper format.
 
@@ -47,7 +47,7 @@
         selectArray(0) = 0
 
         'Shoot it over to the ReadRecord sub
-        Dim returnArray() As String = DbReadRecord(VideoDatabaseLocation, $"SELECT * FROM studio where name='{Network}'", selectArray)
+        Dim returnArray() As String = DbReadRecord($"SELECT * FROM studio where name='{Network}'", selectArray)
 
         'The ID # is all we need. Just make sure it's not a null reference.
         If returnArray IsNot Nothing Then
