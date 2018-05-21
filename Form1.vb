@@ -383,7 +383,7 @@ Public Class Form1
         Form3.ListBox1.Items.Clear()
 
         'TODO - Use Event
-        'txtShowNetwork.Items.Clear()
+        'cboTvShowNetwork.Items.Clear()
 
         'TODO - Use Event
         'txtMovieNetwork.Items.Clear()
@@ -404,7 +404,7 @@ Public Class Form1
             Form3.ListBox1.Items.Add(ReturnArray(x))
             
             'TODO - Use Event
-            'txtShowNetwork.Items.Add(ReturnArray(x))
+            'cboTvShowNetwork.Items.Add(ReturnArray(x))
 
             'TODO - Use Event
             'txtMovieNetwork.Items.Add(ReturnArray(x))
@@ -417,7 +417,7 @@ Public Class Form1
         Form8.ListBox1.Sorted = True
         
         'TODO - Use Event
-        'txtShowNetwork.Sorted = True
+        'cboTvShowNetwork.Sorted = True
         
         'TODO - Use Event
         'txtMovieNetwork.Sorted = True
@@ -504,7 +504,7 @@ Public Class Form1
             'TODO - Reset as part of event raised above
 '            TxtShowName.Text = ""
 '            txtShowLocation.Text = ""
-'            TVShowPictureBox.ImageLocation = ""
+'            TvShowPictureBox.ImageLocation = ""
         End If
     End Sub
 
