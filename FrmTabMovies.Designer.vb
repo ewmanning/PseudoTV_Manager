@@ -41,7 +41,7 @@ Partial Class FrmTabMovies
         '
         Me.MovieLabel.AutoSize = true
         Me.MovieLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.MovieLabel.Location = New System.Drawing.Point(309, 26)
+        Me.MovieLabel.Location = New System.Drawing.Point(305, 13)
         Me.MovieLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.MovieLabel.Name = "MovieLabel"
         Me.MovieLabel.Size = New System.Drawing.Size(83, 31)
@@ -50,10 +50,10 @@ Partial Class FrmTabMovies
         '
         'BtnMovieNetworkBrowse
         '
-        Me.BtnMovieNetworkBrowse.Location = New System.Drawing.Point(667, 57)
+        Me.BtnMovieNetworkBrowse.Location = New System.Drawing.Point(674, 57)
         Me.BtnMovieNetworkBrowse.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnMovieNetworkBrowse.Name = "BtnMovieNetworkBrowse"
-        Me.BtnMovieNetworkBrowse.Size = New System.Drawing.Size(41, 36)
+        Me.BtnMovieNetworkBrowse.Size = New System.Drawing.Size(41, 33)
         Me.BtnMovieNetworkBrowse.TabIndex = 48
         Me.BtnMovieNetworkBrowse.Text = "..."
         Me.BtnMovieNetworkBrowse.UseVisualStyleBackColor = true
@@ -84,18 +84,19 @@ Partial Class FrmTabMovies
         Me.cboMovieNetwork.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboMovieNetwork.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.cboMovieNetwork.FormattingEnabled = true
-        Me.cboMovieNetwork.Location = New System.Drawing.Point(308, 57)
+        Me.cboMovieNetwork.Location = New System.Drawing.Point(311, 57)
         Me.cboMovieNetwork.Margin = New System.Windows.Forms.Padding(4)
         Me.cboMovieNetwork.Name = "cboMovieNetwork"
-        Me.cboMovieNetwork.Size = New System.Drawing.Size(349, 33)
+        Me.cboMovieNetwork.Size = New System.Drawing.Size(355, 33)
         Me.cboMovieNetwork.TabIndex = 45
         '
         'MovieLocation
         '
-        Me.MovieLocation.Location = New System.Drawing.Point(308, 116)
+        Me.MovieLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.MovieLocation.Location = New System.Drawing.Point(311, 115)
         Me.MovieLocation.Margin = New System.Windows.Forms.Padding(4)
         Me.MovieLocation.Name = "MovieLocation"
-        Me.MovieLocation.Size = New System.Drawing.Size(352, 22)
+        Me.MovieLocation.Size = New System.Drawing.Size(355, 24)
         Me.MovieLocation.TabIndex = 44
         '
         'BtnRemoveGenre
@@ -125,7 +126,7 @@ Partial Class FrmTabMovies
         Me.MovieGenresList.Location = New System.Drawing.Point(311, 208)
         Me.MovieGenresList.Margin = New System.Windows.Forms.Padding(4)
         Me.MovieGenresList.Name = "MovieGenresList"
-        Me.MovieGenresList.Size = New System.Drawing.Size(352, 244)
+        Me.MovieGenresList.Size = New System.Drawing.Size(355, 244)
         Me.MovieGenresList.TabIndex = 41
         '
         'Label13
@@ -154,10 +155,10 @@ Partial Class FrmTabMovies
         '
         'MoviePicture
         '
-        Me.MoviePicture.Location = New System.Drawing.Point(740, 82)
+        Me.MoviePicture.Location = New System.Drawing.Point(723, 57)
         Me.MoviePicture.Margin = New System.Windows.Forms.Padding(4)
         Me.MoviePicture.Name = "MoviePicture"
-        Me.MoviePicture.Size = New System.Drawing.Size(403, 510)
+        Me.MoviePicture.Size = New System.Drawing.Size(400, 500)
         Me.MoviePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.MoviePicture.TabIndex = 38
         Me.MoviePicture.TabStop = false
