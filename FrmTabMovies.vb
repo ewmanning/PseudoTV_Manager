@@ -110,7 +110,7 @@
     End Sub
 
     'TODO - Look at this and Refactor
-    Private Sub BtnTempLocationBrowse_Click(sender As Object, e As EventArgs) Handles BtnTempLocationBrowse.Click
+    Private Sub BtnMovieNetworkBrowse_Click(sender As Object, e As EventArgs) Handles BtnMovieNetworkBrowse.Click
         If MovieList.SelectedItems.Count <= 0 Then Return
 
         Form1.RefreshAllStudios()
@@ -131,7 +131,7 @@
         MovieLocation.Enabled = True
         BtnAddGenre.Enabled = True
         BtnSaveMovie.Enabled = True
-        BtnTempLocationBrowse.Enabled = True
+        BtnMovieNetworkBrowse.Enabled = True
     End Sub
 
     Private Sub _frmMovieGenres_MovieGenresAdded(ByVal genres As ListView.SelectedListViewItemCollection) 
@@ -168,7 +168,7 @@
         BtnAddGenre.Enabled = False
         BtnRemoveGenre.Enabled = False
         BtnSaveMovie.Enabled = False
-        BtnTempLocationBrowse.Enabled = False
+        BtnMovieNetworkBrowse.Enabled = False
     End Sub
 
     Private Sub UpdateMovieNetwork(ByVal movieId As String) 

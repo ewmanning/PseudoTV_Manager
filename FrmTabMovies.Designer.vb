@@ -23,7 +23,7 @@ Partial Class FrmTabMovies
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.MovieLabel = New System.Windows.Forms.Label()
-        Me.BtnTempLocationBrowse = New System.Windows.Forms.Button()
+        Me.BtnMovieNetworkBrowse = New System.Windows.Forms.Button()
         Me.MovieIDLabel = New System.Windows.Forms.Label()
         Me.BtnSaveMovie = New System.Windows.Forms.Button()
         Me.cboMovieNetwork = New System.Windows.Forms.ComboBox()
@@ -48,15 +48,15 @@ Partial Class FrmTabMovies
         Me.MovieLabel.TabIndex = 49
         Me.MovieLabel.Text = "Temp"
         '
-        'BtnTempLocationBrowse
+        'BtnMovieNetworkBrowse
         '
-        Me.BtnTempLocationBrowse.Location = New System.Drawing.Point(667, 57)
-        Me.BtnTempLocationBrowse.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnTempLocationBrowse.Name = "BtnTempLocationBrowse"
-        Me.BtnTempLocationBrowse.Size = New System.Drawing.Size(41, 36)
-        Me.BtnTempLocationBrowse.TabIndex = 48
-        Me.BtnTempLocationBrowse.Text = "..."
-        Me.BtnTempLocationBrowse.UseVisualStyleBackColor = true
+        Me.BtnMovieNetworkBrowse.Location = New System.Drawing.Point(667, 57)
+        Me.BtnMovieNetworkBrowse.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnMovieNetworkBrowse.Name = "BtnMovieNetworkBrowse"
+        Me.BtnMovieNetworkBrowse.Size = New System.Drawing.Size(41, 36)
+        Me.BtnMovieNetworkBrowse.TabIndex = 48
+        Me.BtnMovieNetworkBrowse.Text = "..."
+        Me.BtnMovieNetworkBrowse.UseVisualStyleBackColor = true
         '
         'MovieIDLabel
         '
@@ -169,7 +169,7 @@ Partial Class FrmTabMovies
         Me.BackColor = System.Drawing.Color.Gray
         Me.ClientSize = New System.Drawing.Size(1200, 800)
         Me.Controls.Add(Me.MovieLabel)
-        Me.Controls.Add(Me.BtnTempLocationBrowse)
+        Me.Controls.Add(Me.BtnMovieNetworkBrowse)
         Me.Controls.Add(Me.MovieIDLabel)
         Me.Controls.Add(Me.BtnSaveMovie)
         Me.Controls.Add(Me.cboMovieNetwork)
@@ -189,7 +189,7 @@ Partial Class FrmTabMovies
 End Sub
 
     Friend WithEvents MovieLabel As Label
-    Friend WithEvents BtnTempLocationBrowse As Button
+    Friend WithEvents BtnMovieNetworkBrowse As Button
     Friend WithEvents MovieIDLabel As Label
     Friend WithEvents BtnSaveMovie As Button
     Friend WithEvents cboMovieNetwork As ComboBox
