@@ -1,4 +1,4 @@
-﻿Public Class Form8
+﻿Public Class FrmMovieNetworks
     Private Sub Form3_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Disposed
         'Add the item name, then make it the selected option.
         'MsgBox("leaving")

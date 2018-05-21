@@ -22,7 +22,6 @@
     Private Sub BtnRemoveGenre_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnRemoveGenre.Click 
         If MovieGenresList.SelectedIndex < 0 Then Return
 
-        Dim genreId = LookUpGenre(MovieGenresList.Items(MovieGenresList.SelectedIndex).ToString)
         MovieGenresList.Items.RemoveAt(MovieGenresList.SelectedIndex)
     End Sub
     
@@ -109,13 +108,11 @@
         RaiseEvent MovieSaved(selectedMovieId, movieName)
     End Sub
 
-    'TODO - Look at this and Refactor
     Private Sub BtnMovieNetworkBrowse_Click(sender As Object, e As EventArgs) Handles BtnMovieNetworkBrowse.Click
         If MovieList.SelectedItems.Count <= 0 Then Return
 
-        Form1.RefreshAllStudios()
-        Form8.Visible = True
-        Form8.Focus()
+        FrmMovieNetworks.Visible = True
+        FrmMovieNetworks.Focus()
     End Sub
     
     Private Sub MovieGenresList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles MovieGenresList.SelectedIndexChanged

@@ -93,7 +93,7 @@ Partial Class FrmTabMovies
         'MovieLocation
         '
         Me.MovieLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.MovieLocation.Location = New System.Drawing.Point(311, 115)
+        Me.MovieLocation.Location = New System.Drawing.Point(311, 98)
         Me.MovieLocation.Margin = New System.Windows.Forms.Padding(4)
         Me.MovieLocation.Name = "MovieLocation"
         Me.MovieLocation.Size = New System.Drawing.Size(355, 24)
@@ -101,7 +101,7 @@ Partial Class FrmTabMovies
         '
         'BtnRemoveGenre
         '
-        Me.BtnRemoveGenre.Location = New System.Drawing.Point(588, 179)
+        Me.BtnRemoveGenre.Location = New System.Drawing.Point(591, 179)
         Me.BtnRemoveGenre.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnRemoveGenre.Name = "BtnRemoveGenre"
         Me.BtnRemoveGenre.Size = New System.Drawing.Size(75, 26)
@@ -111,7 +111,7 @@ Partial Class FrmTabMovies
         '
         'BtnAddGenre
         '
-        Me.BtnAddGenre.Location = New System.Drawing.Point(505, 179)
+        Me.BtnAddGenre.Location = New System.Drawing.Point(508, 179)
         Me.BtnAddGenre.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnAddGenre.Name = "BtnAddGenre"
         Me.BtnAddGenre.Size = New System.Drawing.Size(75, 26)

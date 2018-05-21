@@ -166,10 +166,10 @@
     <Compile Include="FrmMovieGenres.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form8.Designer.vb">
-      <DependentUpon>Form8.vb</DependentUpon>
+    <Compile Include="FrmMovieNetworks.Designer.vb">
+      <DependentUpon>FrmMovieNetworks.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form8.vb">
+    <Compile Include="FrmMovieNetworks.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ModGlobal.vb" />
@@ -219,8 +219,8 @@
     <EmbeddedResource Include="FrmMovieGenres.resx">
       <DependentUpon>FrmMovieGenres.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form8.resx">
-      <DependentUpon>Form8.vb</DependentUpon>
+    <EmbeddedResource Include="FrmMovieNetworks.resx">
+      <DependentUpon>FrmMovieNetworks.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

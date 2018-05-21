@@ -387,7 +387,7 @@ Public Class Form1
 
         'TODO - Use Event
         'txtMovieNetwork.Items.Clear()
-        Form8.ListBox1.Items.Clear()
+        FrmMovieNetworks.ListBox1.Items.Clear()
 
         'Set an array with the columns you want returned
         Dim SelectArray(0)
@@ -408,13 +408,13 @@ Public Class Form1
 
             'TODO - Use Event
             'txtMovieNetwork.Items.Add(ReturnArray(x))
-            Form8.ListBox1.Items.Add(ReturnArray(x))
+            FrmMovieNetworks.ListBox1.Items.Add(ReturnArray(x))
         Next
 
         'Sort them all.
         Option2.Sorted = True
         Form3.ListBox1.Sorted = True
-        Form8.ListBox1.Sorted = True
+        FrmMovieNetworks.ListBox1.Sorted = True
         
         'TODO - Use Event
         'cboTvShowNetwork.Sorted = True
