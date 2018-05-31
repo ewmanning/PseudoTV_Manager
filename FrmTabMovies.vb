@@ -8,6 +8,7 @@
         MovieList.Columns.Add("ID", 0, HorizontalAlignment.Left)
 
         RefreshMovieList()
+        RefreshStudioList()
         ClearMovieDetail()
     End Sub
     
@@ -19,7 +20,7 @@
         FrmMovieGenres.Focus()
     End Sub
 
-    Private Sub BtnRemoveGenre_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnRemoveGenre.Click 
+    Private Sub BtnRemoveGenre_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnRemoveMovieGenre.Click 
         If MovieGenresList.SelectedIndex < 0 Then Return
 
         MovieGenresList.Items.RemoveAt(MovieGenresList.SelectedIndex)
@@ -46,9 +47,7 @@
             
         'We only have 1 response, since it searches by ID. So, just break it into parts. 
         Dim returnArraySplit() As String = Split(returnArray(0), "~")
-
-        Dim movieGenres As String = returnArraySplit(0)
-
+        
         MovieLabel.Text = movieName
         MovieLocation.Text = returnArraySplit(1)
 
@@ -61,6 +60,7 @@
 
         'TODO - Enahncement: Use list from cutom Movie type to define genres for movie
         'Loop through each Movie Genre, if there more than one.
+        Dim movieGenres As String = returnArraySplit(0)
         MovieGenresList.Items.Clear()
         If InStr(movieGenres, " / ") > 0 Then
             Dim movieGenresSplit() As String = Split(movieGenres, " / ")
@@ -80,7 +80,9 @@
 
         Dim movieLocationFolder = System.IO.Path.GetDirectoryName(MovieLocation.Text)
         
-        If System.IO.File.Exists(movieLocationFolder & "\folder.jpg") Then
+        If System.IO.File.Exists(movieLocationFolder & "\poster.jpg") Then
+            MoviePicture.ImageLocation = $"{movieLocationFolder}\poster.jpg"
+        Else If System.IO.File.Exists(movieLocationFolder & "\folder.jpg") Then
             MoviePicture.ImageLocation = $"{movieLocationFolder}\folder.jpg"
         Else
             MoviePicture.ImageLocation = Nothing
@@ -117,9 +119,9 @@
     
     Private Sub MovieGenresList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles MovieGenresList.SelectedIndexChanged
         If DirectCast(sender, ListBox).SelectedItem = "" Then
-            BtnRemoveGenre.Enabled = False
+            BtnRemoveMovieGenre.Enabled = False
         Else 
-            BtnRemoveGenre.Enabled = True
+            BtnRemoveMovieGenre.Enabled = True
         End If
     End Sub
     
@@ -163,7 +165,7 @@
         MovieGenresList.Items.Clear()
         MoviePicture.ImageLocation = Nothing
         BtnAddGenre.Enabled = False
-        BtnRemoveGenre.Enabled = False
+        BtnRemoveMovieGenre.Enabled = False
         BtnSaveMovie.Enabled = False
         BtnMovieNetworkBrowse.Enabled = False
     End Sub
@@ -172,8 +174,8 @@
         'Grab the Network ID based on the name
         Dim networkId = LookUpNetwork(cboMovieNetwork.Text)
 
-        DbExecute("DELETE FROM studio_link WHERE media_type = 'movie' AND media_id = '" & movieId & "'")
-        DbExecute("INSERT INTO studio_link (studio_id, media_id, media_type) VALUES ('" & networkId & "', '" & movieId & "', 'movie')")
+        DbExecute($"DELETE FROM studio_link WHERE media_type = 'movie' AND media_id = '{movieId}'")
+        DbExecute($"INSERT INTO studio_link (studio_id, media_id, media_type) VALUES ('{networkId}', '{movieId}', 'movie')")
     End Sub
 
     Private Sub UpdateMovie(ByVal movieId As String) 
@@ -219,4 +221,21 @@
             MovieList.Items.Add(itm)
         Next
     End Sub
+    
+    Private Sub RefreshStudioList()
+        cboMovieNetwork.Items.Clear()
+
+        Dim selectArray(0)
+        selectArray(0) = 1
+
+        Dim returnArray() As String = DbReadRecord("SELECT * FROM studio ORDER BY name", selectArray)
+
+        'Now, read the output of the array.
+        'Loop through each of the Array items.
+        For index = 0 To returnArray.Count - 1
+            'Add the item to the combo.
+            cboMovieNetwork.Items.Add(returnArray(index))
+        Next
+    End Sub
+
 End Class

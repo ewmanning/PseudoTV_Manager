@@ -28,7 +28,7 @@ Partial Class FrmTabMovies
         Me.BtnSaveMovie = New System.Windows.Forms.Button()
         Me.cboMovieNetwork = New System.Windows.Forms.ComboBox()
         Me.MovieLocation = New System.Windows.Forms.TextBox()
-        Me.BtnRemoveGenre = New System.Windows.Forms.Button()
+        Me.BtnRemoveMovieGenre = New System.Windows.Forms.Button()
         Me.BtnAddGenre = New System.Windows.Forms.Button()
         Me.MovieGenresList = New System.Windows.Forms.ListBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -99,15 +99,15 @@ Partial Class FrmTabMovies
         Me.MovieLocation.Size = New System.Drawing.Size(355, 24)
         Me.MovieLocation.TabIndex = 44
         '
-        'BtnRemoveGenre
+        'BtnRemoveMovieGenre
         '
-        Me.BtnRemoveGenre.Location = New System.Drawing.Point(591, 179)
-        Me.BtnRemoveGenre.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnRemoveGenre.Name = "BtnRemoveGenre"
-        Me.BtnRemoveGenre.Size = New System.Drawing.Size(75, 26)
-        Me.BtnRemoveGenre.TabIndex = 43
-        Me.BtnRemoveGenre.Text = "Remove"
-        Me.BtnRemoveGenre.UseVisualStyleBackColor = true
+        Me.BtnRemoveMovieGenre.Location = New System.Drawing.Point(591, 179)
+        Me.BtnRemoveMovieGenre.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnRemoveMovieGenre.Name = "BtnRemoveMovieGenre"
+        Me.BtnRemoveMovieGenre.Size = New System.Drawing.Size(75, 26)
+        Me.BtnRemoveMovieGenre.TabIndex = 43
+        Me.BtnRemoveMovieGenre.Text = "Remove"
+        Me.BtnRemoveMovieGenre.UseVisualStyleBackColor = true
         '
         'BtnAddGenre
         '
@@ -175,7 +175,7 @@ Partial Class FrmTabMovies
         Me.Controls.Add(Me.BtnSaveMovie)
         Me.Controls.Add(Me.cboMovieNetwork)
         Me.Controls.Add(Me.MovieLocation)
-        Me.Controls.Add(Me.BtnRemoveGenre)
+        Me.Controls.Add(Me.BtnRemoveMovieGenre)
         Me.Controls.Add(Me.BtnAddGenre)
         Me.Controls.Add(Me.MovieGenresList)
         Me.Controls.Add(Me.Label13)
@@ -195,7 +195,7 @@ End Sub
     Friend WithEvents BtnSaveMovie As Button
     Friend WithEvents cboMovieNetwork As ComboBox
     Friend WithEvents MovieLocation As TextBox
-    Friend WithEvents BtnRemoveGenre As Button
+    Friend WithEvents BtnRemoveMovieGenre As Button
     Friend WithEvents BtnAddGenre As Button
     Friend WithEvents MovieGenresList As ListBox
     Friend WithEvents Label13 As Label
