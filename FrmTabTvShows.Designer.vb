@@ -39,7 +39,7 @@ Partial Class FrmTabTvShows
         '
         'BtnNetworkBrowse
         '
-        Me.BtnNetworkBrowse.Location = New System.Drawing.Point(666, 51)
+        Me.BtnNetworkBrowse.Location = New System.Drawing.Point(633, 51)
         Me.BtnNetworkBrowse.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnNetworkBrowse.Name = "BtnNetworkBrowse"
         Me.BtnNetworkBrowse.Size = New System.Drawing.Size(41, 33)
@@ -52,15 +52,15 @@ Partial Class FrmTabTvShows
         Me.cboTvShowNetwork.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTvShowNetwork.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.cboTvShowNetwork.FormattingEnabled = true
-        Me.cboTvShowNetwork.Location = New System.Drawing.Point(303, 51)
+        Me.cboTvShowNetwork.Location = New System.Drawing.Point(305, 51)
         Me.cboTvShowNetwork.Margin = New System.Windows.Forms.Padding(4)
         Me.cboTvShowNetwork.Name = "cboTvShowNetwork"
-        Me.cboTvShowNetwork.Size = New System.Drawing.Size(355, 33)
+        Me.cboTvShowNetwork.Size = New System.Drawing.Size(320, 33)
         Me.cboTvShowNetwork.TabIndex = 33
         '
         'btnRemoveTvShowGenre
         '
-        Me.btnRemoveTvShowGenre.Location = New System.Drawing.Point(582, 157)
+        Me.btnRemoveTvShowGenre.Location = New System.Drawing.Point(549, 171)
         Me.btnRemoveTvShowGenre.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRemoveTvShowGenre.Name = "btnRemoveTvShowGenre"
         Me.btnRemoveTvShowGenre.Size = New System.Drawing.Size(76, 25)
@@ -70,7 +70,7 @@ Partial Class FrmTabTvShows
         '
         'btnAddTvShowGenre
         '
-        Me.btnAddTvShowGenre.Location = New System.Drawing.Point(498, 158)
+        Me.btnAddTvShowGenre.Location = New System.Drawing.Point(465, 171)
         Me.btnAddTvShowGenre.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddTvShowGenre.Name = "btnAddTvShowGenre"
         Me.btnAddTvShowGenre.Size = New System.Drawing.Size(76, 25)
@@ -82,10 +82,10 @@ Partial Class FrmTabTvShows
         '
         Me.TvShowGenresList.FormattingEnabled = true
         Me.TvShowGenresList.ItemHeight = 16
-        Me.TvShowGenresList.Location = New System.Drawing.Point(303, 186)
+        Me.TvShowGenresList.Location = New System.Drawing.Point(305, 204)
         Me.TvShowGenresList.Margin = New System.Windows.Forms.Padding(4)
         Me.TvShowGenresList.Name = "TvShowGenresList"
-        Me.TvShowGenresList.Size = New System.Drawing.Size(355, 244)
+        Me.TvShowGenresList.Size = New System.Drawing.Size(320, 244)
         Me.TvShowGenresList.TabIndex = 30
         '
         'TvShowPictureBox
@@ -111,7 +111,7 @@ Partial Class FrmTabTvShows
         '
         'SaveTVShow
         '
-        Me.SaveTVShow.Location = New System.Drawing.Point(303, 438)
+        Me.SaveTVShow.Location = New System.Drawing.Point(518, 456)
         Me.SaveTVShow.Margin = New System.Windows.Forms.Padding(4)
         Me.SaveTVShow.Name = "SaveTVShow"
         Me.SaveTVShow.Size = New System.Drawing.Size(107, 37)
@@ -122,10 +122,10 @@ Partial Class FrmTabTvShows
         'txtShowLocation
         '
         Me.txtShowLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.txtShowLocation.Location = New System.Drawing.Point(303, 92)
+        Me.txtShowLocation.Location = New System.Drawing.Point(305, 92)
         Me.txtShowLocation.Margin = New System.Windows.Forms.Padding(4)
         Me.txtShowLocation.Name = "txtShowLocation"
-        Me.txtShowLocation.Size = New System.Drawing.Size(355, 24)
+        Me.txtShowLocation.Size = New System.Drawing.Size(320, 24)
         Me.txtShowLocation.TabIndex = 26
         '
         'txtShowName
@@ -135,14 +135,14 @@ Partial Class FrmTabTvShows
         Me.txtShowName.Location = New System.Drawing.Point(305, 13)
         Me.txtShowName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtShowName.Name = "txtShowName"
-        Me.txtShowName.Size = New System.Drawing.Size(353, 30)
+        Me.txtShowName.Size = New System.Drawing.Size(320, 30)
         Me.txtShowName.TabIndex = 24
         '
         'Label2
         '
         Me.Label2.AutoSize = true
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 18!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label2.Location = New System.Drawing.Point(305, 146)
+        Me.Label2.Location = New System.Drawing.Point(305, 159)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(112, 36)

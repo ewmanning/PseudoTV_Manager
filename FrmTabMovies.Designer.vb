@@ -71,7 +71,7 @@ Partial Class FrmTabMovies
         '
         'BtnSaveMovie
         '
-        Me.BtnSaveMovie.Location = New System.Drawing.Point(311, 460)
+        Me.BtnSaveMovie.Location = New System.Drawing.Point(561, 460)
         Me.BtnSaveMovie.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnSaveMovie.Name = "BtnSaveMovie"
         Me.BtnSaveMovie.Size = New System.Drawing.Size(105, 38)
@@ -101,7 +101,7 @@ Partial Class FrmTabMovies
         '
         'BtnRemoveMovieGenre
         '
-        Me.BtnRemoveMovieGenre.Location = New System.Drawing.Point(591, 179)
+        Me.BtnRemoveMovieGenre.Location = New System.Drawing.Point(591, 174)
         Me.BtnRemoveMovieGenre.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnRemoveMovieGenre.Name = "BtnRemoveMovieGenre"
         Me.BtnRemoveMovieGenre.Size = New System.Drawing.Size(75, 26)
@@ -111,7 +111,7 @@ Partial Class FrmTabMovies
         '
         'BtnAddGenre
         '
-        Me.BtnAddGenre.Location = New System.Drawing.Point(508, 179)
+        Me.BtnAddGenre.Location = New System.Drawing.Point(508, 174)
         Me.BtnAddGenre.Margin = New System.Windows.Forms.Padding(4)
         Me.BtnAddGenre.Name = "BtnAddGenre"
         Me.BtnAddGenre.Size = New System.Drawing.Size(75, 26)
@@ -133,7 +133,7 @@ Partial Class FrmTabMovies
         '
         Me.Label13.AutoSize = true
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 18!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label13.Location = New System.Drawing.Point(316, 173)
+        Me.Label13.Location = New System.Drawing.Point(305, 163)
         Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(112, 36)
