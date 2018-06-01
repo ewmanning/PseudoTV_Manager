@@ -380,7 +380,7 @@ Public Class Form1
 
         'Clear all
         Option2.Items.Clear()
-        Form3.ListBox1.Items.Clear()
+        FrmTvStudios.ListBox1.Items.Clear()
 
         'TODO - Use Event
         'cboTvShowNetwork.Items.Clear()
@@ -401,7 +401,7 @@ Public Class Form1
         'Loop through each of the Array items.
         For x = 0 To ReturnArray.Count - 1
             Option2.Items.Add(ReturnArray(x))
-            Form3.ListBox1.Items.Add(ReturnArray(x))
+            FrmTvStudios.ListBox1.Items.Add(ReturnArray(x))
             
             'TODO - Use Event
             'cboTvShowNetwork.Items.Add(ReturnArray(x))
@@ -413,7 +413,7 @@ Public Class Form1
 
         'Sort them all.
         Option2.Sorted = True
-        Form3.ListBox1.Sorted = True
+        FrmTvStudios.ListBox1.Sorted = True
         FrmMovieNetworks.ListBox1.Sorted = True
         
         'TODO - Use Event
