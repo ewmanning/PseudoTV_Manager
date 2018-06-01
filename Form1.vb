@@ -7,7 +7,6 @@ Imports System.IO
 Public Class Form1
     'For sorting columns in listviews
     Private m_SortingColumn As ColumnHeader
-    Private m_SortingColumn2 As ColumnHeader
 
     'C:\Users\Nate\AppData\Roaming\XBMC\userdata\addon_data\script.pseudotv\Settings2.xml
 
@@ -24,18 +23,18 @@ Public Class Form1
 
     '===================================================================================================================
     
-    Private WithEvents _frmTvShows As New FrmTabTvShows
-    Private WithEvents _frmMovies As New FrmTabMovies
+    Private WithEvents _frmTabGenres As New FrmTabGenres
+    Private WithEvents _frmTabTvShows As New FrmTabTvShows
+    Private WithEvents _frmTabMovies As New FrmTabMovies
 
-    Private Sub _frmTvShows_TvShowSaved(ByVal tvShowId As String, ByVal tvShowName As String) Handles _frmTvShows.TvShowSaved
+    Private Sub _frmTabTvShows_TvShowSaved(ByVal tvShowId As String, ByVal tvShowName As String) Handles _frmTabTvShows.TvShowSaved
         Status.Text = $"Updated {tvShowName} Successfully"
     End Sub
 
-    Private Sub _frmMovies_MovieSaved(movieId As String, movieName As String) Handles _frmMovies.MovieSaved
+    Private Sub _frmTabMovies_MovieSaved(movieId As String, movieName As String) Handles _frmTabMovies.MovieSaved
         Status.Text = $"Updated {movieName} Successfully"
 
         RefreshNetworkListMovies()
-        RefreshGenres()
     End Sub
 
     '===================================================================================================================
@@ -184,77 +183,7 @@ Public Class Form1
         TVGuideList.Sort()
     End Sub
 
-    Public Sub RefreshGenres()
-        GenresList.Items.Clear()
-        Dim SelectArrayMain(1)
-        SelectArrayMain(0) = 0
-        SelectArrayMain(1) = 1
-
-        'Shoot it over to the ReadRecord sub
-        Dim ReturnArrayMain() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre", SelectArrayMain)
-
-        'Loop through and read the name
-
-
-        For x = 0 To UBound(ReturnArrayMain)
-
-
-            'Sort them into an array
-            Dim SplitItem() As String = Split(ReturnArrayMain(x), "~")
-            'Position 0 = genre ID
-            'Position 1 = genre name
-
-            'Push array into ListViewItem
-
-            Dim SelectArray(0)
-            SelectArray(0) = 1
-
-            'Now, grab a list of all the shows that match the GenreID
-            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'tvshow' AND genre_id ='" & SplitItem(0) & "'", SelectArray)
-
-            'This will grab the number of movies.
-            Dim ReturnArray2() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'movie' AND genre_id ='" & SplitItem(0) & "'", SelectArray)
-
-
-            Dim ShowNum
-            Dim MovieNum
-
-            'This is the total number of shows that match this genre.
-            'Also, verify the returning array is something, not null before proceeding.
-            If ReturnArray Is Nothing Then
-                ShowNum = 0
-            Else
-                ShowNum = ReturnArray.Count
-            End If
-
-            If ReturnArray2 Is Nothing Then
-                MovieNum = 0
-            Else
-                MovieNum = ReturnArray2.Count
-            End If
-
-            Dim str(4) As String
-            'Genre Name
-            '# of shows in genre
-            '# of movies in genre
-            'Total of both /\
-            'Genre ID
-
-            str(0) = SplitItem(1)
-            str(1) = ShowNum
-            str(2) = MovieNum
-            str(3) = ShowNum + MovieNum
-            str(4) = SplitItem(0)
-
-
-            Dim itm As ListViewItem
-            itm = New ListViewItem(str)
-            'Add to list
-            GenresList.Items.Add(itm)
-        Next
-
-        GenresList.Sort()
-    End Sub
+    
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         NetworkList.Columns.Add("Network", 140, HorizontalAlignment.Left)
@@ -262,12 +191,6 @@ Public Class Form1
 
         MovieNetworkList.Columns.Add("Studio", 170, HorizontalAlignment.Left)
         MovieNetworkList.Columns.Add("# Movies", 60, HorizontalAlignment.Left)
-
-        GenresList.Columns.Add("Genre", 100, HorizontalAlignment.Left)
-        GenresList.Columns.Add("# Shows", 60, HorizontalAlignment.Center)
-        GenresList.Columns.Add("# Movies", 60, HorizontalAlignment.Center)
-        GenresList.Columns.Add("# Total", 80, HorizontalAlignment.Center)
-        GenresList.Columns.Add("Genre ID", 0, HorizontalAlignment.Left)
 
         TVGuideList.Columns.Add("Channel", 200, HorizontalAlignment.Left)
         TVGuideList.Columns.Add("Type", 0, HorizontalAlignment.Left)
@@ -325,35 +248,27 @@ Public Class Form1
             MsgBox("Unable to locate the location of XBMC video library and PseudoTV's setting location.  Please enter them and save the changes.")
         End If
 
-        'TV Show Tab
-        'Dim frmTvShows As New FrmTabTvShows
-        _frmTvShows.TopLevel = False
-        _frmTvShows.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-        _frmTvShows.Dock = DockStyle.Fill
-
-        Dim tpTvShows As New TabPage
-        tpTvShows.Name = "TvShows"
-        tpTvShows.Text = $"TV Shows"
-        tpTvShows.Controls.Add(_frmTvShows)
-        tpTvShows.AutoSize = True
-        TabControl1.TabPages.Add(tpTvShows)
-        _frmTvShows.Show()
-
-        'Movies Tab
-        _frmMovies.TopLevel = False
-        _frmMovies.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-        _frmMovies.Dock = DockStyle.Fill
-
-        Dim tpMovies As New TabPage
-        tpMovies.Name = "Movies"
-        tpMovies.Text = $"Movies"
-        tpMovies.Controls.Add(_frmMovies)
-        tpMovies.AutoSize = True
-        TabControl1.TabPages.Add(tpMovies)
-        _frmMovies.Show()
+        'Tabs
+        AddTab(_frmTabGenres, "Genres", "Genres")
+        AddTab(_frmTabTvShows, "TvShows", "TV Shows")
+        AddTab(_frmTabMovies, "Movies", "Movies")
 
     End Sub
     
+    Private Sub AddTab(form As Form, tabName As String, tabText As String) 
+        form.TopLevel = False
+        form.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+        form.Dock = DockStyle.Fill
+
+        Dim tab As New TabPage
+        tab.Name = tabName
+        tab.Text = $"{tabText}"
+        tab.Controls.Add(form)
+        tab.AutoSize = True
+        TabControl1.TabPages.Add(tab)
+        form.Show()
+    End Sub
+
 
     Public Sub RefreshAllGenres()
         Dim SavedText = Option2.Text
@@ -499,7 +414,9 @@ Public Class Form1
             RefreshAllStudios()
             RefreshNetworkList()
             RefreshNetworkListMovies()
-            RefreshGenres()
+
+            'TODO - Do not access directly. Use an event
+            FrmTabGenres.RefreshGenres()
 
             'TODO - Reset as part of event raised above
 '            TxtShowName.Text = ""
@@ -508,89 +425,9 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub GenresList_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles GenresList.ColumnClick
-        ' Get the new sorting column. 
-        Dim new_sorting_column As ColumnHeader = GenresList.Columns(e.Column)
-        ' Figure out the new sorting order. 
-        Dim sort_order As System.Windows.Forms.SortOrder
-        If m_SortingColumn2 Is Nothing Then
-            ' New column. Sort ascending. 
-            sort_order = SortOrder.Ascending
-        Else ' See if this is the same column. 
-            If new_sorting_column.Equals(m_SortingColumn2) Then
-                ' Same column. Switch the sort order. 
-                If m_SortingColumn2.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                ' New column. Sort ascending. 
-                sort_order = SortOrder.Ascending
-            End If
-            ' Remove the old sort indicator. 
-            m_SortingColumn2.Text = m_SortingColumn2.Text.Substring(2)
-        End If
-        ' Display the new sort order. 
-        m_SortingColumn2 = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn2.Text = "> " & m_SortingColumn2.Text
-        Else
-            m_SortingColumn2.Text = "< " & m_SortingColumn2.Text
-        End If
-        ' Create a comparer. 
-        GenresList.ListViewItemSorter = New clsListviewSorter(e.Column, sort_order)
-        ' Sort. 
-        GenresList.Sort()
-    End Sub
+    
 
-    Private Sub GenresList_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GenresList.SelectedIndexChanged
-        GenresListSubList.Items.Clear()
-        GenresListSubListMovies.Items.Clear()
-
-        If GenresList.SelectedIndices.Count > 0 Then
-            Dim SelectArray(0)
-            SelectArray(0) = 1
-
-
-            'Now, gather a list of all the show IDs that match the genreID
-            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'tvshow' AND genre_id ='" & GenresList.Items(GenresList.SelectedIndices(0)).SubItems(4).Text & "'", SelectArray)
-
-            'Now loop through each one individually.
-
-            If ReturnArray Is Nothing Then
-            Else
-                For x = 0 To ReturnArray.Count - 1
-                    Dim ShowNameArray(0) As String
-                    SelectArray(0) = 1
-
-                    Dim ReturnArray2() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM tvshow WHERE idShow='" & ReturnArray(x) & "'", SelectArray)
-
-                    'Now add that name to the list.
-                    GenresListSubList.Items.Add(ReturnArray2(0))
-                Next
-            End If
-
-            'MOVIES REPEAT THIS PROCESS.
-
-            Dim ReturnArrayMovies() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM genre_link WHERE media_type = 'movie' AND genre_id ='" & GenresList.Items(GenresList.SelectedIndices(0)).SubItems(4).Text & "'", SelectArray)
-
-            'Now loop through each one individually 
-            If ReturnArrayMovies Is Nothing Then
-            Else
-                For x = 0 To ReturnArrayMovies.Count - 1
-                    Dim ShowNameArray(0) As String
-                    SelectArray(0) = 2
-
-                    Dim ReturnArray2() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM movie WHERE idMovie='" & ReturnArrayMovies(x) & "'", SelectArray)
-
-                    'Now add that name to the list.
-                    GenresListSubListMovies.Items.Add(ReturnArray2(0))
-                Next
-            End If
-        End If
-
-    End Sub
+    
 
     
 
@@ -868,9 +705,10 @@ Public Class Form1
                     RefreshAllStudios()
 
                 ElseIf PlayListNumber = 3 Then
+                    'TODO - Do not access directly. Use an event
                     'TV Genre
-                    For x = 0 To GenresList.Items.Count - 1
-                        Option2.Items.Add(GenresList.Items(x).SubItems(0).Text)
+                    For x = 0 To FrmTabGenres.GenresList.Items.Count - 1
+                        Option2.Items.Add(FrmTabGenres.GenresList.Items(x).SubItems(0).Text)
                     Next
 
                 ElseIf PlayListNumber = 4 Then
@@ -882,11 +720,12 @@ Public Class Form1
                     RefreshAllGenres()
 
                     'TODO Need access to TVShowList?
-'                ElseIf PlayListNumber = 6 Then
-'                    'TV Show
-'                    For x = 0 To TVShowList.Items.Count - 1
-'                        Option2.Items.Add(TVShowList.Items(x).SubItems(0).Text)
-'                    Next
+                ElseIf PlayListNumber = 6 Then
+                    'TODO - Do not access directly. Use an event
+                    'TV Show
+                    For x = 0 To FrmTabTvShows.TVShowList.Items.Count - 1
+                        Option2.Items.Add(FrmTabTvShows.TVShowList.Items(x).SubItems(0).Text)
+                    Next
                 ElseIf PlayListNumber = 7 Then
                     'Directory
                     NoOption = True
@@ -1054,8 +893,9 @@ Public Class Form1
         ElseIf PlayListType.SelectedIndex = 2 Then
             RefreshAllStudios()
         ElseIf PlayListType.SelectedIndex = 3 Then
-            For x = 0 To GenresList.Items.Count - 1
-                Option2.Items.Add(GenresList.Items(x).SubItems(0).Text)
+            'TODO -Do not access directly. Use an event
+            For x = 0 To FrmTabGenres.GenresList.Items.Count - 1
+                Option2.Items.Add(FrmTabGenres.GenresList.Items(x).SubItems(0).Text)
             Next
         ElseIf PlayListType.SelectedIndex = 4 Then
             RefreshAllGenres()

@@ -118,6 +118,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmTabGenres.Designer.vb">
+      <DependentUpon>FrmTabGenres.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTabGenres.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmTabMovies.Designer.vb">
       <DependentUpon>FrmTabMovies.vb</DependentUpon>
     </Compile>
@@ -194,6 +200,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTabGenres.resx">
+      <DependentUpon>FrmTabGenres.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTabMovies.resx">
       <DependentUpon>FrmTabMovies.vb</DependentUpon>

@@ -32,12 +32,6 @@ Partial Class Form1
         Me.Label14 = New System.Windows.Forms.Label()
         Me.NetworkListSubList = New System.Windows.Forms.ListBox()
         Me.NetworkList = New System.Windows.Forms.ListView()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.GenresListSubListMovies = New System.Windows.Forms.ListBox()
-        Me.GenresListSubList = New System.Windows.Forms.ListBox()
-        Me.GenresList = New System.Windows.Forms.ListView()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TVGuideSubMenu = New System.Windows.Forms.ListView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -89,7 +83,6 @@ Partial Class Form1
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl1.SuspendLayout
         Me.TabPage2.SuspendLayout
-        Me.TabPage3.SuspendLayout
         Me.TabPage4.SuspendLayout
         Me.ContextMenuStrip1.SuspendLayout
         Me.StatusStrip1.SuspendLayout
@@ -99,7 +92,6 @@ Partial Class Form1
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Location = New System.Drawing.Point(0, 33)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
@@ -192,78 +184,6 @@ Partial Class Form1
         Me.NetworkList.TabIndex = 1
         Me.NetworkList.UseCompatibleStateImageBehavior = false
         Me.NetworkList.View = System.Windows.Forms.View.Details
-        '
-        'TabPage3
-        '
-        Me.TabPage3.BackColor = System.Drawing.Color.Gray
-        Me.TabPage3.Controls.Add(Me.Label17)
-        Me.TabPage3.Controls.Add(Me.Label16)
-        Me.TabPage3.Controls.Add(Me.GenresListSubListMovies)
-        Me.TabPage3.Controls.Add(Me.GenresListSubList)
-        Me.TabPage3.Controls.Add(Me.GenresList)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage3.Margin = New System.Windows.Forms.Padding(4)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(1393, 924)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Genres"
-        '
-        'Label17
-        '
-        Me.Label17.BackColor = System.Drawing.Color.Silver
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label17.Location = New System.Drawing.Point(900, 16)
-        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(256, 25)
-        Me.Label17.TabIndex = 6
-        Me.Label17.Text = "Movies"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label16
-        '
-        Me.Label16.BackColor = System.Drawing.Color.Silver
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label16.Location = New System.Drawing.Point(444, 16)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(256, 25)
-        Me.Label16.TabIndex = 5
-        Me.Label16.Text = "TV Shows"
-        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'GenresListSubListMovies
-        '
-        Me.GenresListSubListMovies.FormattingEnabled = true
-        Me.GenresListSubListMovies.ItemHeight = 16
-        Me.GenresListSubListMovies.Location = New System.Drawing.Point(900, 44)
-        Me.GenresListSubListMovies.Margin = New System.Windows.Forms.Padding(4)
-        Me.GenresListSubListMovies.Name = "GenresListSubListMovies"
-        Me.GenresListSubListMovies.Size = New System.Drawing.Size(255, 516)
-        Me.GenresListSubListMovies.TabIndex = 4
-        '
-        'GenresListSubList
-        '
-        Me.GenresListSubList.FormattingEnabled = true
-        Me.GenresListSubList.ItemHeight = 16
-        Me.GenresListSubList.Location = New System.Drawing.Point(444, 44)
-        Me.GenresListSubList.Margin = New System.Windows.Forms.Padding(4)
-        Me.GenresListSubList.Name = "GenresListSubList"
-        Me.GenresListSubList.Size = New System.Drawing.Size(255, 516)
-        Me.GenresListSubList.TabIndex = 3
-        '
-        'GenresList
-        '
-        Me.GenresList.FullRowSelect = true
-        Me.GenresList.HideSelection = false
-        Me.GenresList.Location = New System.Drawing.Point(4, 4)
-        Me.GenresList.Margin = New System.Windows.Forms.Padding(4)
-        Me.GenresList.Name = "GenresList"
-        Me.GenresList.Size = New System.Drawing.Size(405, 771)
-        Me.GenresList.Sorting = System.Windows.Forms.SortOrder.Ascending
-        Me.GenresList.TabIndex = 2
-        Me.GenresList.UseCompatibleStateImageBehavior = false
-        Me.GenresList.View = System.Windows.Forms.View.Details
         '
         'TabPage4
         '
@@ -794,7 +714,6 @@ Partial Class Form1
         Me.Text = "PseudoTV Manager"
         Me.TabControl1.ResumeLayout(false)
         Me.TabPage2.ResumeLayout(false)
-        Me.TabPage3.ResumeLayout(false)
         Me.TabPage4.ResumeLayout(false)
         Me.TabPage4.PerformLayout
         Me.ContextMenuStrip1.ResumeLayout(false)
@@ -815,9 +734,6 @@ End Sub
     Friend WithEvents AaaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NetworkList As System.Windows.Forms.ListView
     Friend WithEvents NetworkListSubList As System.Windows.Forms.ListBox
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents GenresList As System.Windows.Forms.ListView
-    Friend WithEvents GenresListSubList As System.Windows.Forms.ListBox
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
     Friend WithEvents TVGuideList As System.Windows.Forms.ListView
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -866,8 +782,5 @@ End Sub
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents MovieNetworkListSubList As System.Windows.Forms.ListBox
     Friend WithEvents MovieNetworkList As System.Windows.Forms.ListView
-    Friend WithEvents GenresListSubListMovies As System.Windows.Forms.ListBox
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents Label16 As System.Windows.Forms.Label
 
 End Class
