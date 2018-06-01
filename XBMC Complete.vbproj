@@ -130,6 +130,12 @@
     <Compile Include="FrmTabMovies.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmTabNetworksStudios.Designer.vb">
+      <DependentUpon>FrmTabNetworksStudios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTabNetworksStudios.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmTabTvShows.Designer.vb">
       <DependentUpon>FrmTabTvShows.vb</DependentUpon>
     </Compile>
@@ -206,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTabMovies.resx">
       <DependentUpon>FrmTabMovies.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTabNetworksStudios.resx">
+      <DependentUpon>FrmTabNetworksStudios.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTabTvShows.resx">
       <DependentUpon>FrmTabTvShows.vb</DependentUpon>

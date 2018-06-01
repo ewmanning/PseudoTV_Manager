@@ -25,13 +25,6 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.MovieNetworkListSubList = New System.Windows.Forms.ListBox()
-        Me.MovieNetworkList = New System.Windows.Forms.ListView()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.NetworkListSubList = New System.Windows.Forms.ListBox()
-        Me.NetworkList = New System.Windows.Forms.ListView()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TVGuideSubMenu = New System.Windows.Forms.ListView()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -82,7 +75,6 @@ Partial Class Form1
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl1.SuspendLayout
-        Me.TabPage2.SuspendLayout
         Me.TabPage4.SuspendLayout
         Me.ContextMenuStrip1.SuspendLayout
         Me.StatusStrip1.SuspendLayout
@@ -91,7 +83,6 @@ Partial Class Form1
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Location = New System.Drawing.Point(0, 33)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
@@ -99,91 +90,6 @@ Partial Class Form1
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(1401, 953)
         Me.TabControl1.TabIndex = 0
-        '
-        'TabPage2
-        '
-        Me.TabPage2.BackColor = System.Drawing.Color.Gray
-        Me.TabPage2.Controls.Add(Me.Label15)
-        Me.TabPage2.Controls.Add(Me.MovieNetworkListSubList)
-        Me.TabPage2.Controls.Add(Me.MovieNetworkList)
-        Me.TabPage2.Controls.Add(Me.Label14)
-        Me.TabPage2.Controls.Add(Me.NetworkListSubList)
-        Me.TabPage2.Controls.Add(Me.NetworkList)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPage2.Size = New System.Drawing.Size(1393, 924)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Networks / Studios"
-        '
-        'Label15
-        '
-        Me.Label15.BackColor = System.Drawing.Color.Silver
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label15.Location = New System.Drawing.Point(619, 7)
-        Me.Label15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(348, 25)
-        Me.Label15.TabIndex = 6
-        Me.Label15.Text = "Movie Studios"
-        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'MovieNetworkListSubList
-        '
-        Me.MovieNetworkListSubList.FormattingEnabled = true
-        Me.MovieNetworkListSubList.ItemHeight = 16
-        Me.MovieNetworkListSubList.Location = New System.Drawing.Point(975, 36)
-        Me.MovieNetworkListSubList.Margin = New System.Windows.Forms.Padding(4)
-        Me.MovieNetworkListSubList.Name = "MovieNetworkListSubList"
-        Me.MovieNetworkListSubList.Size = New System.Drawing.Size(263, 388)
-        Me.MovieNetworkListSubList.TabIndex = 5
-        '
-        'MovieNetworkList
-        '
-        Me.MovieNetworkList.FullRowSelect = true
-        Me.MovieNetworkList.HideSelection = false
-        Me.MovieNetworkList.Location = New System.Drawing.Point(619, 36)
-        Me.MovieNetworkList.Margin = New System.Windows.Forms.Padding(4)
-        Me.MovieNetworkList.Name = "MovieNetworkList"
-        Me.MovieNetworkList.Size = New System.Drawing.Size(347, 731)
-        Me.MovieNetworkList.TabIndex = 4
-        Me.MovieNetworkList.UseCompatibleStateImageBehavior = false
-        Me.MovieNetworkList.View = System.Windows.Forms.View.Details
-        '
-        'Label14
-        '
-        Me.Label14.BackColor = System.Drawing.Color.Silver
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label14.Location = New System.Drawing.Point(4, 7)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(335, 25)
-        Me.Label14.TabIndex = 3
-        Me.Label14.Text = "TV Networks"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'NetworkListSubList
-        '
-        Me.NetworkListSubList.FormattingEnabled = true
-        Me.NetworkListSubList.ItemHeight = 16
-        Me.NetworkListSubList.Location = New System.Drawing.Point(347, 36)
-        Me.NetworkListSubList.Margin = New System.Windows.Forms.Padding(4)
-        Me.NetworkListSubList.Name = "NetworkListSubList"
-        Me.NetworkListSubList.Size = New System.Drawing.Size(263, 388)
-        Me.NetworkListSubList.TabIndex = 2
-        '
-        'NetworkList
-        '
-        Me.NetworkList.FullRowSelect = true
-        Me.NetworkList.HideSelection = false
-        Me.NetworkList.Location = New System.Drawing.Point(4, 36)
-        Me.NetworkList.Margin = New System.Windows.Forms.Padding(4)
-        Me.NetworkList.Name = "NetworkList"
-        Me.NetworkList.Size = New System.Drawing.Size(333, 731)
-        Me.NetworkList.TabIndex = 1
-        Me.NetworkList.UseCompatibleStateImageBehavior = false
-        Me.NetworkList.View = System.Windows.Forms.View.Details
         '
         'TabPage4
         '
@@ -713,7 +619,6 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "PseudoTV Manager"
         Me.TabControl1.ResumeLayout(false)
-        Me.TabPage2.ResumeLayout(false)
         Me.TabPage4.ResumeLayout(false)
         Me.TabPage4.PerformLayout
         Me.ContextMenuStrip1.ResumeLayout(false)
@@ -726,14 +631,11 @@ Partial Class Form1
 
 End Sub
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Friend WithEvents Status As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AaaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NetworkList As System.Windows.Forms.ListView
-    Friend WithEvents NetworkListSubList As System.Windows.Forms.ListBox
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
     Friend WithEvents TVGuideList As System.Windows.Forms.ListView
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -778,9 +680,5 @@ End Sub
     Friend WithEvents TVGuideSubMenu As System.Windows.Forms.ListView
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents DontShowToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents MovieNetworkListSubList As System.Windows.Forms.ListBox
-    Friend WithEvents MovieNetworkList As System.Windows.Forms.ListView
 
 End Class

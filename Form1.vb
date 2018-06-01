@@ -5,8 +5,6 @@ Imports System
 Imports System.IO
 
 Public Class Form1
-    'For sorting columns in listviews
-    Private m_SortingColumn As ColumnHeader
 
     'C:\Users\Nate\AppData\Roaming\XBMC\userdata\addon_data\script.pseudotv\Settings2.xml
 
@@ -23,9 +21,13 @@ Public Class Form1
 
     '===================================================================================================================
     
+    Private WithEvents _frmTabNetworksStudios As New FrmTabNetworksStudios
     Private WithEvents _frmTabGenres As New FrmTabGenres
     Private WithEvents _frmTabTvShows As New FrmTabTvShows
     Private WithEvents _frmTabMovies As New FrmTabMovies
+
+    'For sorting columns in listviews
+    Private m_SortingColumn As ColumnHeader
 
     Private Sub _frmTabTvShows_TvShowSaved(ByVal tvShowId As String, ByVal tvShowName As String) Handles _frmTabTvShows.TvShowSaved
         Status.Text = $"Updated {tvShowName} Successfully"
@@ -34,7 +36,7 @@ Public Class Form1
     Private Sub _frmTabMovies_MovieSaved(movieId As String, movieName As String) Handles _frmTabMovies.MovieSaved
         Status.Text = $"Updated {movieName} Successfully"
 
-        RefreshNetworkListMovies()
+        FrmTabNetworksStudios.RefreshNetworkListMovies()
     End Sub
 
     '===================================================================================================================
@@ -186,11 +188,6 @@ Public Class Form1
     
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        NetworkList.Columns.Add("Network", 140, HorizontalAlignment.Left)
-        NetworkList.Columns.Add("# Shows", 60, HorizontalAlignment.Left)
-
-        MovieNetworkList.Columns.Add("Studio", 170, HorizontalAlignment.Left)
-        MovieNetworkList.Columns.Add("# Movies", 60, HorizontalAlignment.Left)
 
         TVGuideList.Columns.Add("Channel", 200, HorizontalAlignment.Left)
         TVGuideList.Columns.Add("Type", 0, HorizontalAlignment.Left)
@@ -249,6 +246,7 @@ Public Class Form1
         End If
 
         'Tabs
+        AddTab(_frmTabNetworksStudios, "NetworksStudios", "Networks / Studios")
         AddTab(_frmTabGenres, "Genres", "Genres")
         AddTab(_frmTabTvShows, "TvShows", "TV Shows")
         AddTab(_frmTabMovies, "Movies", "Movies")
@@ -341,59 +339,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub NetworkList_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles NetworkList.ColumnClick
-        ' Get the new sorting column. 
-        Dim new_sorting_column As ColumnHeader = NetworkList.Columns(e.Column)
-        ' Figure out the new sorting order. 
-        Dim sort_order As System.Windows.Forms.SortOrder
-        If m_SortingColumn Is Nothing Then
-            ' New column. Sort ascending. 
-            sort_order = SortOrder.Ascending
-        Else ' See if this is the same column. 
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                ' Same column. Switch the sort order. 
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                ' New column. Sort ascending. 
-                sort_order = SortOrder.Ascending
-            End If
-            ' Remove the old sort indicator. 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-        ' Display the new sort order. 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-        ' Create a comparer. 
-        NetworkList.ListViewItemSorter = New clsListviewSorter(e.Column, sort_order)
-        ' Sort. 
-        NetworkList.Sort()
-    End Sub
-
-    Private Sub NetworkList_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NetworkList.SelectedIndexChanged
-
-        NetworkListSubList.Items.Clear()
-
-        If NetworkList.SelectedIndices.Count > 0 Then
-
-            Dim SelectArray(0)
-            SelectArray(0) = 1
-
-            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM tvshow WHERE c14='" & NetworkList.Items(NetworkList.SelectedIndices(0)).SubItems(0).Text & "'", SelectArray)
-
-            For x = 0 To ReturnArray.Count - 1
-                NetworkListSubList.Items.Add(ReturnArray(x))
-            Next
-
-        End If
-    End Sub
+    
 
     
 
@@ -412,8 +358,10 @@ Public Class Form1
             'RefreshTVShows()
 
             RefreshAllStudios()
-            RefreshNetworkList()
-            RefreshNetworkListMovies()
+            
+            'TODO - Do not access directly. Use an event
+            FrmTabNetworksStudios.RefreshNetworkList()
+            FrmTabNetworksStudios.RefreshNetworkListMovies()
 
             'TODO - Do not access directly. Use an event
             FrmTabGenres.RefreshGenres()
@@ -691,8 +639,9 @@ Public Class Form1
                 ElseIf PlayListNumber = 1 Then
                     'This is a TV Network.
 
-                    For x = 0 To NetworkList.Items.Count - 1
-                        Option2.Items.Add(NetworkList.Items(x).SubItems(0).Text)
+                    'TODO - Do not access directly. Use events.
+                    For x = 0 To FrmTabNetworksStudios.NetworkList.Items.Count - 1
+                        Option2.Items.Add(FrmTabNetworksStudios.NetworkList.Items(x).SubItems(0).Text)
                     Next
 
                     'Make sure there's a value in this box.
@@ -883,12 +832,12 @@ Public Class Form1
         Option2.Text = ""
 
         If PlayListType.SelectedIndex = 0 Then
-            For x = 0 To NetworkList.Items.Count - 1
-                Option2.Items.Add(NetworkList.Items(x).SubItems(0).Text)
+            For x = 0 To FrmTabNetworksStudios.NetworkList.Items.Count - 1
+                Option2.Items.Add(FrmTabNetworksStudios.NetworkList.Items(x).SubItems(0).Text)
             Next
         ElseIf PlayListType.SelectedIndex = 1 Then
-            For x = 0 To NetworkList.Items.Count - 1
-                Option2.Items.Add(NetworkList.Items(x).SubItems(0).Text)
+            For x = 0 To FrmTabNetworksStudios.NetworkList.Items.Count - 1
+                Option2.Items.Add(FrmTabNetworksStudios.NetworkList.Items(x).SubItems(0).Text)
             Next
         ElseIf PlayListType.SelectedIndex = 2 Then
             RefreshAllStudios()
@@ -1298,176 +1247,7 @@ Public Class Form1
     End Sub
 
     
-
-
-
     
-
-    Public Sub RefreshNetworkListMovies()
-        MovieNetworkList.Items.Clear()
-
-        Dim SelectArray(1)
-        SelectArray(0) = 2
-        SelectArray(1) = 20
-
-        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM movie ORDER BY c18 ASC", SelectArray)
-
-
-        'Loop through each returned Movie
-        For x = 0 To ReturnArray.Count - 1
-
-
-            Dim ReturnArraySplit() As String
-
-            Dim ShowName As String
-            Dim ShowNetwork As String
-
-            ReturnArraySplit = Split(ReturnArray(x), "~")
-
-            ShowName = ReturnArraySplit(0)
-            ShowNetwork = ReturnArraySplit(1)
-
-            Dim NetworkListed As Boolean = False
-
-            For y = 0 To MovieNetworkList.Items.Count - 1
-
-                If MovieNetworkList.Items(y).SubItems(0).Text = ShowNetwork Then
-                    NetworkListed = True
-                    MovieNetworkList.Items(y).SubItems(1).Text = MovieNetworkList.Items(y).SubItems(1).Text + 1
-                End If
-
-            Next
-
-            If NetworkListed = False Then
-                Dim itm As ListViewItem
-                Dim str(2) As String
-
-                str(0) = ShowNetwork
-                str(1) = 1
-
-                itm = New ListViewItem(str)
-
-                'Add the item to the TV show list.
-                MovieNetworkList.Items.Add(itm)
-
-
-            End If
-
-        Next
-
-    End Sub
-
-    Public Sub RefreshNetworkList()
-        NetworkList.Items.Clear()
-
-        Dim SelectArray(1)
-        SelectArray(0) = 1
-        SelectArray(1) = 15
-
-        Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM tvshow ORDER BY c14 ASC", SelectArray)
-
-
-        'Loop through each returned TV show.
-        For x = 0 To ReturnArray.Count - 1
-
-
-            Dim ReturnArraySplit() As String
-
-            Dim ShowName As String
-            Dim ShowNetwork As String
-
-            ReturnArraySplit = Split(ReturnArray(x), "~")
-
-            ShowName = ReturnArraySplit(0)
-            ShowNetwork = ReturnArraySplit(1)
-
-            Dim NetworkListed As Boolean = False
-
-            For y = 0 To NetworkList.Items.Count - 1
-
-                If NetworkList.Items(y).SubItems(0).Text = ShowNetwork Then
-                    NetworkListed = True
-                    NetworkList.Items(y).SubItems(1).Text = NetworkList.Items(y).SubItems(1).Text + 1
-                End If
-
-            Next
-
-            If NetworkListed = False Then
-                Dim itm As ListViewItem
-                Dim str(2) As String
-
-                str(0) = ShowNetwork
-                str(1) = 1
-
-                itm = New ListViewItem(str)
-
-                'Add the item to the TV show list.
-                NetworkList.Items.Add(itm)
-
-
-            End If
-
-        Next
-
-    End Sub
-
-    
-
-    
-
-    Private Sub MovieNetworkList_ColumnClick(ByVal sender As Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles MovieNetworkList.ColumnClick
-        ' Get the new sorting column. 
-        Dim new_sorting_column As ColumnHeader = MovieNetworkList.Columns(e.Column)
-        ' Figure out the new sorting order. 
-        Dim sort_order As System.Windows.Forms.SortOrder
-        If m_SortingColumn Is Nothing Then
-            ' New column. Sort ascending. 
-            sort_order = SortOrder.Ascending
-        Else ' See if this is the same column. 
-            If new_sorting_column.Equals(m_SortingColumn) Then
-                ' Same column. Switch the sort order. 
-                If m_SortingColumn.Text.StartsWith("> ") Then
-                    sort_order = SortOrder.Descending
-                Else
-                    sort_order = SortOrder.Ascending
-                End If
-            Else
-                ' New column. Sort ascending. 
-                sort_order = SortOrder.Ascending
-            End If
-            ' Remove the old sort indicator. 
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(2)
-        End If
-        ' Display the new sort order. 
-        m_SortingColumn = new_sorting_column
-        If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "> " & m_SortingColumn.Text
-        Else
-            m_SortingColumn.Text = "< " & m_SortingColumn.Text
-        End If
-        ' Create a comparer. 
-        MovieNetworkList.ListViewItemSorter = New clsListviewSorter(e.Column, sort_order)
-        ' Sort. 
-        MovieNetworkList.Sort()
-    End Sub
-
-    Private Sub MovieNetworkList_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MovieNetworkList.SelectedIndexChanged
-        MovieNetworkListSubList.Items.Clear()
-
-        If MovieNetworkList.SelectedIndices.Count > 0 Then
-
-            Dim SelectArray(0)
-            SelectArray(0) = 2
-
-            Dim ReturnArray() As String = DbReadRecord(VideoDatabaseLocation, "SELECT * FROM movie WHERE c18='" & MovieNetworkList.Items(MovieNetworkList.SelectedIndices(0)).SubItems(0).Text & "'", SelectArray)
-
-            For x = 0 To ReturnArray.Count - 1
-                MovieNetworkListSubList.Items.Add(ReturnArray(x))
-            Next
-
-        End If
-    End Sub
-
     Private Sub Button19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         LookUpGenre("aaccc")
     End Sub
